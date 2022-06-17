@@ -1,0 +1,512 @@
+S = round(s%*%t(s),2)
+Sigma = S
+nu = 10
+R = cov2cor(S)
+lower = a = rep(-Inf,p)
+rbenchmark::benchmark(
+MomTrunc::meanvarTMD(a,b,mu,Sigma,dist="normal"),
+MomTrunc::MCmeanvarTMD(lower = a,upper = b,mu = mu,Sigma = Sigma,dist ="normal"),
+optmeanvarTMD(lower = a,upper = b,mu = mu,Sigma = Sigma,dist ="normal"),replications = 300)
+bool1*bool2
+lower[bool1*bool2]
+bool1
+bool2
+bool1 & bool2
+lower[!(bool1 & bool2)]
+lower
+all(lower[!(bool1 & bool2)])
+all(is.infinite(lower[!(bool1 & bool2)]))
+all(is.infinite(upper[!(bool1 & bool2)]))
+all(is.infinite(lower[!(bool1 & bool2)]))
+all(is.infinite(lower[!(bool1 & bool2)])) | all(is.infinite(upper[!(bool1 & bool2)]))
+p = length(mu)
+bool1 = is.infinite(lower)
+bool2 = is.infinite(upper)
+finite.dims = sum(bool1*bool2)
+finite.dims
+lower
+upper
+bool1 = is.infinite(lower)
+bool2 = is.infinite(upper)
+bool1
+bool2
+infinite.dims = sum(bool1*bool2)
+infinite.dims
+bool1 = is.infinite(lower)
+bool2 = is.infinite(upper)
+infinite.dims = sum(bool1*bool2)
+infinite.dims
+infinite.dims
+bool1 = is.infinite(lower)
+bool2 = is.infinite(upper)
+bool1
+bool2
+all(is.infinite(lower[!(bool1 & bool2)]))
+infinite.dims
+all(is.infinite(lower[!(bool1 & bool2)]))
+bool1
+bool2
+bool1
+bool2
+(bool1 & bool2)])
+p = length(mu)
+bool1 = is.infinite(lower)
+bool2 = is.infinite(upper)
+infinite.dims = sum(bool1*bool2)
+infinite.dims
+dim = length(c(mu)) + ifelse(is.null(lambda),0,ncol(as.matrix(lambda))) - infinite.dims
+dim
+infinite.dims
+infinite.dims < p
+infinite.dims
+uni = all(is.infinite(lower[!(bool1 & bool2)])) | all(is.infinite(upper[!(bool1 & bool2)]))
+uni
+optmeanvarTMD = function(lower = rep(-Inf,length(mu)),upper = rep(Inf,length(mu)),mu,Sigma,lambda = NULL, tau = NULL,Gamma = NULL,nu = NULL,dist,n = 10000)
+{
+p = length(mu)
+bool1 = is.infinite(lower)
+bool2 = is.infinite(upper)
+infinite.dims = sum(bool1*bool2)
+dim = length(c(mu)) + ifelse(is.null(lambda),0,ncol(as.matrix(lambda))) - infinite.dims
+if(infinite.dims < p){
+uni = all(is.infinite(lower[!(bool1 & bool2)])) | all(is.infinite(upper[!(bool1 & bool2)]))
+if(uni & dist %in% c("normal","SN","ESN","SUN")){dim = dim - 2}
+}else{
+return(MomTrunc::meanvarTMD(lower,upper,mu,Sigma,lambda,tau,Gamma,nu,dist))
+}
+if(dim < 3){
+return(MomTrunc::meanvarTMD(lower,upper,mu,Sigma,lambda,tau,Gamma,nu,dist))
+}else{
+return(MomTrunc::MCmeanvarTMD(lower,upper,mu,Sigma,lambda,tau,Gamma,nu,dist,n))
+}
+}
+p = 0
+p = p+1
+mu  = c(1:p/10)
+lower = a = -mu - abs(rnorm(p))
+upper = b = mu+1 +0.5*a + abs(rnorm(p)) + 3
+s  = matrix(rnorm(p^2),p,p)
+S = round(s%*%t(s),2)
+Sigma = S
+nu = 10
+R = cov2cor(S)
+lower = a = rep(-Inf,p)
+rbenchmark::benchmark(
+MomTrunc::meanvarTMD(a,b,mu,Sigma,dist="t",nu = nu),
+MomTrunc::MCmeanvarTMD(lower = a,upper = b,mu = mu,Sigma = Sigma,dist ="t",nu = nu),
+optmeanvarTMD(lower = a,upper = b,mu = mu,Sigma = Sigma,dist ="t",nu = nu),replications = 300)
+rbenchmark::benchmark(
+MomTrunc::meanvarTMD(a,b,mu,Sigma,dist="normal"),
+MomTrunc::MCmeanvarTMD(lower = a,upper = b,mu = mu,Sigma = Sigma,dist ="normal"),
+optmeanvarTMD(lower = a,upper = b,mu = mu,Sigma = Sigma,dist ="normal"),replications = 300)
+mu  = c(1:p/10)
+lower = a = -mu - abs(rnorm(p))
+upper = b = mu+1 +0.5*a + abs(rnorm(p)) + 3
+s  = matrix(rnorm(p^2),p,p)
+S = round(s%*%t(s),2)
+Sigma = S
+nu = 10
+R = cov2cor(S)
+lower = a = rep(-Inf,p)
+rbenchmark::benchmark(
+MomTrunc::meanvarTMD(a,b,mu,Sigma,dist="t",nu = nu),
+MomTrunc::MCmeanvarTMD(lower = a,upper = b,mu = mu,Sigma = Sigma,dist ="t",nu = nu),
+optmeanvarTMD(lower = a,upper = b,mu = mu,Sigma = Sigma,dist ="t",nu = nu),replications = 300)
+rbenchmark::benchmark(
+MomTrunc::meanvarTMD(a,b,mu,Sigma,dist="normal"),
+MomTrunc::MCmeanvarTMD(lower = a,upper = b,mu = mu,Sigma = Sigma,dist ="normal"),
+optmeanvarTMD(lower = a,upper = b,mu = mu,Sigma = Sigma,dist ="normal"),replications = 300)
+p = p+1
+mu  = c(1:p/10)
+lower = a = -mu - abs(rnorm(p))
+upper = b = mu+1 +0.5*a + abs(rnorm(p)) + 3
+s  = matrix(rnorm(p^2),p,p)
+S = round(s%*%t(s),2)
+Sigma = S
+nu = 10
+R = cov2cor(S)
+lower = a = rep(-Inf,p)
+rbenchmark::benchmark(
+MomTrunc::meanvarTMD(a,b,mu,Sigma,dist="t",nu = nu),
+MomTrunc::MCmeanvarTMD(lower = a,upper = b,mu = mu,Sigma = Sigma,dist ="t",nu = nu),
+optmeanvarTMD(lower = a,upper = b,mu = mu,Sigma = Sigma,dist ="t",nu = nu),replications = 300)
+rbenchmark::benchmark(
+MomTrunc::meanvarTMD(a,b,mu,Sigma,dist="normal"),
+MomTrunc::MCmeanvarTMD(lower = a,upper = b,mu = mu,Sigma = Sigma,dist ="normal"),
+optmeanvarTMD(lower = a,upper = b,mu = mu,Sigma = Sigma,dist ="normal"),replications = 300)
+p = p+1
+mu  = c(1:p/10)
+lower = a = -mu - abs(rnorm(p))
+upper = b = mu+1 +0.5*a + abs(rnorm(p)) + 3
+s  = matrix(rnorm(p^2),p,p)
+S = round(s%*%t(s),2)
+Sigma = S
+nu = 10
+R = cov2cor(S)
+lower = a = rep(-Inf,p)
+rbenchmark::benchmark(
+MomTrunc::meanvarTMD(a,b,mu,Sigma,dist="t",nu = nu),
+MomTrunc::MCmeanvarTMD(lower = a,upper = b,mu = mu,Sigma = Sigma,dist ="t",nu = nu),
+optmeanvarTMD(lower = a,upper = b,mu = mu,Sigma = Sigma,dist ="t",nu = nu),replications = 300)
+rbenchmark::benchmark(
+MomTrunc::meanvarTMD(a,b,mu,Sigma,dist="normal"),
+MomTrunc::MCmeanvarTMD(lower = a,upper = b,mu = mu,Sigma = Sigma,dist ="normal"),
+optmeanvarTMD(lower = a,upper = b,mu = mu,Sigma = Sigma,dist ="normal"),replications = 300)
+p
+rbenchmark::benchmark(
+MomTrunc::meanvarTMD(a,b,mu,Sigma,dist="t",nu = nu),
+MomTrunc::MCmeanvarTMD(lower = a,upper = b,mu = mu,Sigma = Sigma,dist ="t",nu = nu),
+optmeanvarTMD(lower = a,upper = b,mu = mu,Sigma = Sigma,dist ="t",nu = nu),replications = 300)
+rbenchmark::benchmark(
+MomTrunc::meanvarTMD(a,b,mu,Sigma,dist="t",nu = nu),
+MomTrunc::MCmeanvarTMD(lower = a,upper = b,mu = mu,Sigma = Sigma,dist ="t",nu = nu),
+optmeanvarTMD(lower = a,upper = b,mu = mu,Sigma = Sigma,dist ="t",nu = nu),replications = 500)
+rbenchmark::benchmark(
+MomTrunc::meanvarTMD(a,b,mu,Sigma,dist="t",nu = nu),
+MomTrunc::MCmeanvarTMD(lower = a,upper = b,mu = mu,Sigma = Sigma,dist ="t",nu = nu),
+optmeanvarTMD(lower = a,upper = b,mu = mu,Sigma = Sigma,dist ="t",nu = nu),replications = 1000)
+rbenchmark::benchmark(
+MomTrunc::meanvarTMD(a,b,mu,Sigma,dist="t",nu = nu),
+MomTrunc::MCmeanvarTMD(lower = a,upper = b,mu = mu,Sigma = Sigma,dist ="t",nu = nu),
+optmeanvarTMD(lower = a,upper = b,mu = mu,Sigma = Sigma,dist ="t",nu = nu),replications = 1000)
+p
+p = p+1
+mu  = c(1:p/10)
+lower = a = -mu - abs(rnorm(p))
+upper = b = mu+1 +0.5*a + abs(rnorm(p)) + 3
+s  = matrix(rnorm(p^2),p,p)
+S = round(s%*%t(s),2)
+Sigma = S
+nu = 10
+R = cov2cor(S)
+lower = a = rep(-Inf,p)
+rbenchmark::benchmark(
+MomTrunc::meanvarTMD(a,b,mu,Sigma,dist="t",nu = nu),
+MomTrunc::MCmeanvarTMD(lower = a,upper = b,mu = mu,Sigma = Sigma,dist ="t",nu = nu),
+optmeanvarTMD(lower = a,upper = b,mu = mu,Sigma = Sigma,dist ="t",nu = nu),replications = 500)
+rbenchmark::benchmark(
+MomTrunc::meanvarTMD(a,b,mu,Sigma,dist="normal"),
+MomTrunc::MCmeanvarTMD(lower = a,upper = b,mu = mu,Sigma = Sigma,dist ="normal"),
+optmeanvarTMD(lower = a,upper = b,mu = mu,Sigma = Sigma,dist ="normal"),replications = 300)
+optmeanvarTMD = function(lower = rep(-Inf,length(mu)),upper = rep(Inf,length(mu)),mu,Sigma,lambda = NULL, tau = NULL,Gamma = NULL,nu = NULL,dist,n = 10000){
+p = length(mu)
+bool1 = is.infinite(lower)
+bool2 = is.infinite(upper)
+infinite.dims = sum(bool1*bool2)
+dim = length(c(mu)) + ifelse(is.null(lambda),0,ncol(as.matrix(lambda))) - infinite.dims
+if(infinite.dims < p){
+if(all(is.infinite(lower[!(bool1 & bool2)])) | all(is.infinite(upper[!(bool1 & bool2)]))){
+if(dist %in% c("normal","SN","ESN","SUN")){
+dim = dim - 2
+}else{
+dim = dim - 1
+}
+}
+}else{
+return(MomTrunc::meanvarTMD(lower,upper,mu,Sigma,lambda,tau,Gamma,nu,dist))
+}
+if(dim < 3){
+return(MomTrunc::meanvarTMD(lower,upper,mu,Sigma,lambda,tau,Gamma,nu,dist))
+}else{
+return(MomTrunc::MCmeanvarTMD(lower,upper,mu,Sigma,lambda,tau,Gamma,nu,dist,n))
+}
+}
+p = 0
+p = p+1
+mu  = c(1:p/10)
+lower = a = -mu - abs(rnorm(p))
+upper = b = mu+1 +0.5*a + abs(rnorm(p)) + 3
+s  = matrix(rnorm(p^2),p,p)
+S = round(s%*%t(s),2)
+Sigma = S
+nu = 10
+R = cov2cor(S)
+lower = a = rep(-Inf,p)
+rbenchmark::benchmark(
+MomTrunc::meanvarTMD(a,b,mu,Sigma,dist="t",nu = nu),
+MomTrunc::MCmeanvarTMD(lower = a,upper = b,mu = mu,Sigma = Sigma,dist ="t",nu = nu),
+optmeanvarTMD(lower = a,upper = b,mu = mu,Sigma = Sigma,dist ="t",nu = nu),replications = 500)
+rbenchmark::benchmark(
+MomTrunc::meanvarTMD(a,b,mu,Sigma,dist="normal"),
+MomTrunc::MCmeanvarTMD(lower = a,upper = b,mu = mu,Sigma = Sigma,dist ="normal"),
+optmeanvarTMD(lower = a,upper = b,mu = mu,Sigma = Sigma,dist ="normal"),replications = 500)
+p = p+1
+mu  = c(1:p/10)
+lower = a = -mu - abs(rnorm(p))
+upper = b = mu+1 +0.5*a + abs(rnorm(p)) + 3
+s  = matrix(rnorm(p^2),p,p)
+S = round(s%*%t(s),2)
+Sigma = S
+nu = 10
+R = cov2cor(S)
+lower = a = rep(-Inf,p)
+rbenchmark::benchmark(
+MomTrunc::meanvarTMD(a,b,mu,Sigma,dist="t",nu = nu),
+MomTrunc::MCmeanvarTMD(lower = a,upper = b,mu = mu,Sigma = Sigma,dist ="t",nu = nu),
+optmeanvarTMD(lower = a,upper = b,mu = mu,Sigma = Sigma,dist ="t",nu = nu),replications = 500)
+rbenchmark::benchmark(
+MomTrunc::meanvarTMD(a,b,mu,Sigma,dist="normal"),
+MomTrunc::MCmeanvarTMD(lower = a,upper = b,mu = mu,Sigma = Sigma,dist ="normal"),
+optmeanvarTMD(lower = a,upper = b,mu = mu,Sigma = Sigma,dist ="normal"),replications = 500)
+p = p+1
+mu  = c(1:p/10)
+lower = a = -mu - abs(rnorm(p))
+upper = b = mu+1 +0.5*a + abs(rnorm(p)) + 3
+s  = matrix(rnorm(p^2),p,p)
+S = round(s%*%t(s),2)
+Sigma = S
+nu = 10
+R = cov2cor(S)
+lower = a = rep(-Inf,p)
+rbenchmark::benchmark(
+MomTrunc::meanvarTMD(a,b,mu,Sigma,dist="t",nu = nu),
+MomTrunc::MCmeanvarTMD(lower = a,upper = b,mu = mu,Sigma = Sigma,dist ="t",nu = nu),
+optmeanvarTMD(lower = a,upper = b,mu = mu,Sigma = Sigma,dist ="t",nu = nu),replications = 500)
+rbenchmark::benchmark(
+MomTrunc::meanvarTMD(a,b,mu,Sigma,dist="normal"),
+MomTrunc::MCmeanvarTMD(lower = a,upper = b,mu = mu,Sigma = Sigma,dist ="normal"),
+optmeanvarTMD(lower = a,upper = b,mu = mu,Sigma = Sigma,dist ="normal"),replications = 500)
+rbenchmark::benchmark(
+MomTrunc::meanvarTMD(a,b,mu,Sigma,dist="t",nu = nu),
+MomTrunc::MCmeanvarTMD(lower = a,upper = b,mu = mu,Sigma = Sigma,dist ="t",nu = nu),
+optmeanvarTMD(lower = a,upper = b,mu = mu,Sigma = Sigma,dist ="t",nu = nu),replications = 500)
+rbenchmark::benchmark(
+MomTrunc::meanvarTMD(a,b,mu,Sigma,dist="t",nu = nu),
+MomTrunc::MCmeanvarTMD(lower = a,upper = b,mu = mu,Sigma = Sigma,dist ="t",nu = nu),
+optmeanvarTMD(lower = a,upper = b,mu = mu,Sigma = Sigma,dist ="t",nu = nu),replications = 500)
+p
+rbenchmark::benchmark(
+MomTrunc::meanvarTMD(a,b,mu,Sigma,dist="normal"),
+MomTrunc::MCmeanvarTMD(lower = a,upper = b,mu = mu,Sigma = Sigma,dist ="normal"),
+optmeanvarTMD(lower = a,upper = b,mu = mu,Sigma = Sigma,dist ="normal"),replications = 500)
+optmeanvarTMD = function(lower = rep(-Inf,length(mu)),upper = rep(Inf,length(mu)),mu,Sigma,lambda = NULL, tau = NULL,Gamma = NULL,nu = NULL,dist,n = 10000){
+p = length(mu)
+bool1 = is.infinite(lower)
+bool2 = is.infinite(upper)
+infinite.dims = sum(bool1*bool2)
+dim = length(c(mu)) + ifelse(is.null(lambda),0,ncol(as.matrix(lambda))) - infinite.dims
+if(infinite.dims < p){
+if(all(is.infinite(lower[!(bool1 & bool2)])) | all(is.infinite(upper[!(bool1 & bool2)]))){
+if(dist %in% c("normal","SN","ESN","SUN")){
+dim = dim - 2}
+# }else{
+#
+#   dim = dim - 1
+#
+# }
+}
+}else{
+return(MomTrunc::meanvarTMD(lower,upper,mu,Sigma,lambda,tau,Gamma,nu,dist))
+}
+if(dim < 3){
+return(MomTrunc::meanvarTMD(lower,upper,mu,Sigma,lambda,tau,Gamma,nu,dist))
+}else{
+return(MomTrunc::MCmeanvarTMD(lower,upper,mu,Sigma,lambda,tau,Gamma,nu,dist,n))
+}
+}
+rbenchmark::benchmark(
+MomTrunc::meanvarTMD(a,b,mu,Sigma,dist="t",nu = nu),
+MomTrunc::MCmeanvarTMD(lower = a,upper = b,mu = mu,Sigma = Sigma,dist ="t",nu = nu),
+optmeanvarTMD(lower = a,upper = b,mu = mu,Sigma = Sigma,dist ="t",nu = nu),replications = 500)
+p
+c(-2,3,0,1,2)[1:p]
+rbenchmark::benchmark(
+MomTrunc::meanvarTMD(a,b,mu,Sigma,lambda = c(-2,3,0,1,2)[1:p],dist="SN"),
+MomTrunc::MCmeanvarTMD(lower = a,upper = b,mu = mu,Sigma = Sigma,lambda = c(-2,3,0,1,2)[1:p],dist ="SN"),
+optmeanvarTMD(lower = a,upper = b,mu = mu,Sigma = Sigma,lambda = c(-2,3,0,1,2)[1:p],dist ="SN"),replications = 500)
+library(MomTrunc)
+library(MomTrunc)
+set.seed(123)
+mu    <- rnorm(n = 3, mean = 0, sd = 1)
+Sigma <- matrix(data = c(1,0.2,0.3,0.2,1,0.4,0.3,0.4,1), nrow = length(mu), ncol = length(mu), byrow = TRUE)
+df    <- 4
+meanvarTMD(lower = rep(0, length(mu)), upper = rep(Inf, length(mu)), mu = mu, Sigma = Sigma, dist = "t", nu = df)
+meanvarTMD(lower = rep(0, length(mu)), mu = mu, Sigma = Sigma, dist = "t", nu = df)
+MCmeanvarTMD(lower = rep(0, length(mu)), upper = rep(Inf, length(mu)), mu = mu, Sigma = Sigma, dist = "t", nu = df, n = 1e6)
+mu = abs(mu)
+meanvarTMD(lower = rep(0, length(mu)), mu = mu, Sigma = Sigma, dist = "t", nu = 5)
+MCmeanvarTMD(lower = rep(0, length(mu)), upper = rep(Inf, length(mu)), mu = mu, Sigma = Sigma, dist = "t", nu = 5, n = 1e6)
+meanvarTMD(lower = rep(0, length(mu)), upper = rep(10^1000, length(mu)), mu = mu, Sigma = Sigma, dist = "t", nu = 5)
+MCmeanvarTMD(lower = rep(0, length(mu)), upper = rep(Inf, length(mu)), mu = mu, Sigma = Sigma, dist = "t", nu = 5, n = 1e6)
+meanvarTMD(lower = rep(-10^12, length(mu)), upper = rep(0, length(mu)), mu = -mu, Sigma = Sigma, dist = "t", nu = 5)
+MCmeanvarTMD(lower = rep(0, length(mu)), upper = rep(Inf, length(mu)), mu = mu, Sigma = Sigma, dist = "t", nu = 5, n = 1e6)
+meanvarTMD(lower = rep(0, length(mu)), mu = mu, Sigma = Sigma, dist = "t", nu = 10)
+MCmeanvarTMD(lower = rep(0, length(mu)), upper = rep(Inf, length(mu)), mu = mu, Sigma = Sigma, dist = "t", nu = 10, n = 1e6)
+df
+meanvarTMD(lower = rep(0, length(mu)), upper = rep(Inf, length(mu)), mu = mu, Sigma = Sigma, dist = "t", nu = df)
+meanvarTMD
+mvtnorm::pmvt(lower = rep(0,length(mu)),delta = mu,sigma = Sigma,df = df,type = "shifted")
+install.packages("tlrmvnmvt")
+library(MomTrunc)
+mu    <- rnorm(n = 3, mean = 0, sd = 1)
+set.seed(123)
+mu    <- rnorm(n = 3, mean = 0, sd = 1)
+Sigma <- matrix(data = c(1,0.2,0.3,0.2,1,0.4,0.3,0.4,1), nrow = length(mu), ncol = length(mu), byrow = TRUE)
+df    <- 4
+meanvarTMD(lower = rep(0, length(mu)), upper = rep(Inf, length(mu)), mu = mu, Sigma = Sigma, dist = "t", nu = df)
+library(MomTrunc)
+mu = c(0.1,0.2,0.3)
+Sigma = matrix(data = c(1,0.2,0.3,0.2,1,0.4,0.3,0.4,1),
+nrow = length(mu),ncol = length(mu),byrow = TRUE)
+value1 = momentsFMD(c(2,0,1),mu,Sigma,dist="normal")
+value2 = momentsFMD(3,mu,Sigma,dist = "t",nu = 7)
+value3 = momentsFMD(c(2,0,1),mu,Sigma,lambda = c(-2,0,1),dist = "SN")
+value4 = momentsFMD(c(2,0,1),mu,Sigma,lambda = c(-2,0,1),tau = 1,dist = "ESN")
+#T case with kappa vector input
+value5 = momentsFMD(c(2,0,1),mu,Sigma,dist = "t",nu = 7)
+value2
+set.seed(123)
+mu    <- rnorm(n = 3, mean = 0, sd = 1)
+Sigma <- matrix(data = c(1,0.2,0.3,0.2,1,0.4,0.3,0.4,1), nrow = length(mu), ncol = length(mu), byrow = TRUE)
+df    <- 4
+meanvarTMD(lower = rep(0, length(mu)), upper = rep(Inf, length(mu)), mu = mu, Sigma = Sigma, dist = "t", nu = df)
+meanvarTMD(lower = rep(0, length(mu)), mu = mu, Sigma = Sigma, dist = "t", nu = df)
+MCmeanvarTMD(lower = rep(0, length(mu)), upper = rep(Inf, length(mu)), mu = mu, Sigma = Sigma, dist = "t", nu = df, n = 1e6)
+mu = abs(mu)
+meanvarTMD(lower = rep(0, length(mu)), mu = mu, Sigma = Sigma, dist = "t", nu = 5)
+MCmeanvarTMD(lower = rep(0, length(mu)), upper = rep(Inf, length(mu)), mu = mu, Sigma = Sigma, dist = "t", nu = 5, n = 1e6)
+meanvarTMD(lower = rep(0, length(mu)), mu = mu, Sigma = Sigma, dist = "t", nu = 5)
+meanvarTMD(lower = rep(0, length(mu)), mu = mu, Sigma = Sigma, dist = "t", nu = 5)
+MCmeanvarTMD(lower = rep(0, length(mu)), upper = rep(Inf, length(mu)), mu = mu, Sigma = Sigma, dist = "t", nu = 5, n = 1e6)
+meanvarTMD(lower = rep(0, length(mu)), upper = rep(10^1000, length(mu)), mu = mu, Sigma = Sigma, dist = "t", nu = 5)
+MCmeanvarTMD(lower = rep(0, length(mu)), upper = rep(Inf, length(mu)), mu = mu, Sigma = Sigma, dist = "t", nu = 5, n = 1e6)
+meanvarTMD(lower = rep(-10^12, length(mu)), upper = rep(0, length(mu)), mu = -mu, Sigma = Sigma, dist = "t", nu = 5)
+MCmeanvarTMD(lower = rep(0, length(mu)), upper = rep(Inf, length(mu)), mu = mu, Sigma = Sigma, dist = "t", nu = 5, n = 1e6)
+meanvarTMD(lower = rep(0, length(mu)), mu = mu, Sigma = Sigma, dist = "t", nu = 10)
+MCmeanvarTMD(lower = rep(0, length(mu)), upper = rep(Inf, length(mu)), mu = mu, Sigma = Sigma, dist = "t", nu = 10, n = 1e6)
+library(MomTrunc)
+pmvn.genz
+a
+a = c(-0.8,-0.7,-0.6)
+b = c(0.5,0.6,0.7)
+mu = c(0.1,0.2,0.3)
+Sigma = matrix(data = c(1,0.2,0.3,0.2,1,0.4,0.3,0.4,1),
+nrow = length(mu),ncol = length(mu),byrow = TRUE)
+set.seed(123)
+mu    <- rnorm(n = 3, mean = 0, sd = 1)
+Sigma <- matrix(data = c(1,0.2,0.3,0.2,1,0.4,0.3,0.4,1), nrow = length(mu), ncol = length(mu), byrow = TRUE)
+df    <- 4
+meanvarTMD(lower = rep(0, length(mu)), upper = rep(Inf, length(mu)), mu = mu, Sigma = Sigma, dist = "t", nu = df)
+meanvarTMD(lower = rep(0, length(mu)), mu = mu, Sigma = Sigma, dist = "t", nu = df)
+MCmeanvarTMD(lower = rep(0, length(mu)), upper = rep(Inf, length(mu)), mu = mu, Sigma = Sigma, dist = "t", nu = df, n = 1e6)
+mu
+mu = abs(mu)
+meanvarTMD(lower = rep(0, length(mu)), mu = mu, Sigma = Sigma, dist = "t", nu = 5)
+MCmeanvarTMD(lower = rep(0, length(mu)), upper = rep(Inf, length(mu)), mu = mu, Sigma = Sigma, dist = "t", nu = 5, n = 1e6)
+meanvarTMD(lower = rep(0, length(mu)), upper = rep(10^1000, length(mu)), mu = mu, Sigma = Sigma, dist = "t", nu = 5)
+MCmeanvarTMD(lower = rep(0, length(mu)), upper = rep(Inf, length(mu)), mu = mu, Sigma = Sigma, dist = "t", nu = 5, n = 1e6)
+df    <- 4.3
+meanvarTMD(lower = rep(0, length(mu)), upper = rep(Inf, length(mu)), mu = mu, Sigma = Sigma, dist = "t", nu = df)
+meanvarTMD(lower = rep(0, length(mu)), upper = rep(Inf, length(mu)), mu = mu, Sigma = Sigma, dist = "t", nu = df)
+mu    <- rnorm(n = 3, mean = 0, sd = 1)
+Sigma <- matrix(data = c(1,0.2,0.3,0.2,1,0.4,0.3,0.4,1), nrow = length(mu), ncol = length(mu), byrow = TRUE)
+df    <- 4.3
+meanvarTMD(lower = rep(0, length(mu)), upper = rep(Inf, length(mu)), mu = mu, Sigma = Sigma, dist = "t", nu = df)
+df    <- 4.6
+meanvarTMD(lower = rep(0, length(mu)), upper = rep(Inf, length(mu)), mu = mu, Sigma = Sigma, dist = "t", nu = df)
+meanvarTMD(lower = rep(0, length(mu)), upper = rep(Inf, length(mu)), mu = mu, Sigma = Sigma, dist = "t", nu = 4)
+meanvarTMD(lower = rep(0, length(mu)), upper = rep(Inf, length(mu)), mu = mu, Sigma = Sigma, dist = "t", nu = 5)
+meanvarTMD(lower = rep(0, length(mu)), upper = rep(Inf, length(mu)), mu = mu, Sigma = Sigma, dist = "t", nu = 2)
+meanvarTMD(lower = rep(0, length(mu)), upper = rep(Inf, length(mu)), mu = mu, Sigma = Sigma, dist = "t", nu = 3)
+meanvarTMD(lower = rep(0, length(mu)), upper = rep(Inf, length(mu)), mu = mu, Sigma = Sigma, dist = "t", nu = 4)
+meanvarTMD(lower = rep(0, length(mu)), upper = rep(Inf, length(mu)), mu = mu, Sigma = Sigma, dist = "t", nu = 5)
+meanvarTMD(lower = rep(0, length(mu)), upper = rep(Inf, length(mu)), mu = mu, Sigma = Sigma, dist = "t", nu = 5)
+meanvarTMD(lower = rep(0, length(mu)), upper = rep(Inf, length(mu)), mu = mu, Sigma = Sigma, dist = "t", nu = 5)
+traceback()
+meanvarTMD(lower = rep(0, length(mu)), upper = rep(Inf, length(mu)), mu = mu, Sigma = Sigma, dist = "t", nu = 5)
+traceback()
+pmvnormt(lower = rep(0, length(mu)), upper = rep(Inf, length(mu)), mu = mu, Sigma = Sigma, dist = "t", nu = 5)
+pmvnormt = function(lower = rep(-Inf,ncol(sigma)),upper = rep(Inf,ncol(sigma)),mean = rep(0,ncol(sigma)),sigma,nu = NULL,uselog2 = FALSE){
+mu = c(mu)
+sigma = as.matrix(sigma)
+p = ncol(sigma)
+lower = c(lower)
+upper = c(upper)
+if(is.null(nu)){
+#normal case
+if(p < 10){
+prob = pmvnorm(lower = lower,upper = upper,mean = mean,sigma = sigma)[1]
+if(prob < 0){
+return(pmvn.genz(lower = lower,upper = upper,mean = mean,sigma = sigma,uselog2 = uselog2)[[1]])
+}else{
+return(ifelse(uselog2,log2(prob),prob))
+}
+}else{
+return(pmvn.genz(lower = lower,upper = upper,mean = mean,sigma = sigma,uselog2 = uselog2)[[1]])
+}
+}else{
+#student t case
+if(p < 10 & nu%%1 == 0){
+lower = lower - mean
+upper = upper - mean
+prob = pmvt(lower = lower,upper = upper,sigma = sigma,df = nu)[1]
+if(prob < 0){
+return(pmvt.genz(lower = lower,upper = upper,sigma = sigma,nu = nu,uselog2 = uselog2)[[1]])
+}else{
+return(ifelse(uselog2,log2(prob),prob))
+}
+}else{
+return(pmvt.genz(lower = lower,upper = upper,mean = mean,sigma = sigma,nu = nu,uselog2 = uselog2)[[1]])
+}
+}
+}
+pmvnormt(lower = rep(0, length(mu)), upper = rep(Inf, length(mu)), mu = mu, Sigma = Sigma, dist = "t", nu = 5)
+pmvnormt(lower = rep(0, length(mu)), upper = rep(Inf, length(mu)),mean = mu,sigma = Sigma,nu = 5)
+mvtnorm::pmvt
+tlrmvnmvt::pmvn
+tlrmvnmvt
+library(tlrmvnmvt)
+remove.packages("tlrmvnmvt", lib="~/R/win-library/3.6")
+install.packages("tlrmvnmvt")
+library(tlrmvnmvt)
+tlrmvnmvt::pmvn
+library(MomTrunc)
+library(MomTrunc)
+set.seed(123)
+mu    <- rnorm(n = 3, mean = 0, sd = 1)
+Sigma <- matrix(data = c(1,0.2,0.3,0.2,1,0.4,0.3,0.4,1), nrow = length(mu), ncol = length(mu), byrow = TRUE)
+df    <- 4.6
+pmvnormt(lower = rep(0, length(mu)), upper = rep(Inf, length(mu)),mean = mu,sigma = Sigma,nu = 5)
+pmvnormt(lower = rep(0, length(mu)), upper = rep(Inf, length(mu)),mean = mu,sigma = Sigma,nu = 5.3)
+pmvnormt = function(lower = rep(-Inf,ncol(sigma)),upper = rep(Inf,ncol(sigma)),mean = rep(0,ncol(sigma)),sigma,nu = NULL,uselog2 = FALSE){
+mean = c(mean)
+sigma = as.matrix(sigma)
+p = ncol(sigma)
+lower = c(lower)
+upper = c(upper)
+if(is.null(nu)){
+#normal case
+if(p < 10){
+prob = mvtnorm::pmvnorm(lower = lower,upper = upper,mean = mean,sigma = sigma)[1]
+if(prob < 0){
+return(tlrmvnmvt::pmvn(lower = lower,upper = upper,mean = mean,sigma = sigma,uselog2 = uselog2)[[1]])
+}else{
+return(ifelse(uselog2,log2(prob),prob))
+}
+}else{
+return(tlrmvnmvt::pmvn(lower = lower,upper = upper,mean = mean,sigma = sigma,uselog2 = uselog2)[[1]])
+}
+}else{
+#student t case
+if(p < 10 & nu%%1 == 0){
+lower = lower - mean
+upper = upper - mean
+prob = mvtnorm::pmvt(lower = lower,upper = upper,sigma = sigma,df = nu)[1]
+if(prob < 0){
+return(tlrmvnmvt::pmvt(lower = lower,upper = upper,sigma = sigma,nu = nu,uselog2 = uselog2)[[1]])
+}else{
+return(ifelse(uselog2,log2(prob),prob))
+}
+}else{
+return(tlrmvnmvt::pmvt(lower = lower,upper = upper,mean = mean,sigma = sigma,nu = nu,uselog2 = uselog2)[[1]])
+}
+}
+}
+library(MomTrunc)
+set.seed(123)
+mu    <- rnorm(n = 3, mean = 0, sd = 1)
+Sigma <- matrix(data = c(1,0.2,0.3,0.2,1,0.4,0.3,0.4,1), nrow = length(mu), ncol = length(mu), byrow = TRUE)
+df    <- 4.6
+pmvnormt(lower = rep(0, length(mu)), upper = rep(Inf, length(mu)),mean = mu,sigma = Sigma,nu = 5)
+pmvnormt(lower = rep(0, length(mu)), upper = rep(Inf, length(mu)),mean = mu,sigma = Sigma,nu = 5.3)
+meanvarTMD(lower = rep(0, length(mu)), upper = rep(Inf, length(mu)), mu = mu, Sigma = Sigma, dist = "t", nu = 4)

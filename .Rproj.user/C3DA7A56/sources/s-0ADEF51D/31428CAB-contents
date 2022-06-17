@@ -1,0 +1,82 @@
+library(ARCensReg)
+?ARCensReg
+
+data(phosphorus)
+
+plot.ts(phosphorus$lP)
+lines(phosphorus$lcl,col=2,lty=2)
+
+#Proportion of censoring
+prop.table(table(phosphorus$cc))
+
+#A censored regression model
+x = cbind(1,phosphorus$lQ)
+miss =  which(is.na(phosphorus$lP))
+AR_reg = ARCensReg(phosphorus$cc,phosphorus$lP,x,cens='left',miss=miss,p=1,tol=.001)
+
+plot.ts(AR_reg$yest)
+
+rr = rev(1:nrow(x))
+ccrev = phosphorus$cc[rr]
+lPrev = phosphorus$lP[rr]
+xrev = x[rr,]
+missrev = which(is.na(lPrev))
+
+plot.ts(lPrev)
+lines(rev(phosphorus$lcl),col=2,lty=2)
+
+AR_reg_rev = ARCensReg(ccrev,lPrev,xrev,cens='left',
+                       miss=missrev,p=1,tol=.001)
+
+plot.ts(lPrev)
+lines(AR_reg_rev$yest,col=3)
+
+
+AR_reg_rev = ARCensReg(ccrev,lPrev,xrev,cens='left',
+                       miss=missrev,p=1,tol=.001)
+
+
+
+rbind(AR_reg$res$theta,
+AR_reg_rev$res$theta)
+
+plot.ts(lPrev)
+lines(AR_reg_rev$yest,col=3)
+
+acf(AR_reg_rev$yest)
+
+AR_reg_rev3 = ARCensReg(ccrev,lPrev,xrev,cens='left',
+                       miss=missrev,p=2,tol=.001)
+
+AR_reg_rev$res$AICcorr
+AR_reg_rev3$res$AICcorr
+
+plot.ts(lPrev)
+lines(AR_reg_rev3$yest,col=2)
+lines(lPrev)
+
+x=cbind(1,runif(100))
+dat = rARCens(n=100,beta = c(1,-1),pit = c(.4,-.2),
+              sig2=.5,x=x,cens='left',pcens=.05)
+#
+plot.ts(dat$data$y)
+table(dat$data$cc)
+
+dat
+
+
+
+test = ARCensReg(cc = dat$data$cc,y = dat$data$y,
+                   x = x,
+                 cens='left',
+        p=2,tol=.001)
+
+
+testrev = ARCensReg(cc = rev(dat$data$cc),
+                    y = rev(dat$data$y),
+                 x = x[nrow(x):1,],
+                 cens='left',
+                 p=2,tol=.001)
+
+rbind(test$res$theta,
+      testrev$res$theta)

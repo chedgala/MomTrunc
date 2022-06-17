@@ -1,0 +1,15 @@
+{
+    "dialog-state": {
+        "query": "cat(",
+        "path": "",
+        "regex": true,
+        "caseSensitive": true,
+        "wholeWord": false,
+        "filePatterns": [],
+        "excludeFilePatterns": [],
+        "resultsCount": 18,
+        "errorCount": 0,
+        "replaceErrors": "",
+        "projectRelative": true
+    }
+}

@@ -1,0 +1,16 @@
+{
+    "args": [
+        "-IC:/Program Files/RStudio/resources/libclang/builtin-headers/5.0.2",
+        "-IC:/Program Files/RStudio/resources/libclang/builtin-headers/libc++/5.0.2",
+        "-IC:/Users/cgala/Documents/R/win-library/3.6/Rcpp/include",
+        "-IC:/Users/cgala/Documents/R/win-library/3.6/RcppArmadillo/include",
+        "-IC:/Users/cgala/Documents/R/win-library/3.6/mvtnorm/include",
+        "-std=gnu++11",
+        "-IC:/PROGRA~1/R/R-36~1.2/include",
+        "-DNDEBUG",
+        "-IC:/Users/cgala/Dropbox/Academic/Packages/MomTrunc/inst/include/"
+    ],
+    "pch": "RcppArmadillo",
+    "is_cpp": true,
+    "hash": "1576984814161463449215108849751510884975"
+}

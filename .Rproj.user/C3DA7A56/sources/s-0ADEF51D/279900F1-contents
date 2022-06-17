@@ -1,0 +1,8 @@
+N = 10^6
+lambda = 0.5
+X = rexp(N,rate = lambda)
+hist(X,breaks = 50,freq = FALSE)
+
+U = pexp(q = X,rate = lambda)
+hist(U,breaks = 50,freq = FALSE)
+abline(h = 1,lwd=2,col="blue")

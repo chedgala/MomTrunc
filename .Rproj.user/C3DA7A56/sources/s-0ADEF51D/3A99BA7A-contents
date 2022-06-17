@@ -1,0 +1,39 @@
+a = c(-0.8,-0.7,-0.6)
+b = c(0.5,0.6,0.7)
+mu = c(0.1,0.2,0.3)
+Sigma = matrix(data = c(1,0.2,0.3,0.2,1,0.4,0.3,0.4,1),
+               nrow = length(mu),ncol = length(mu),byrow = TRUE)
+
+
+## Normal case
+
+# Theoretical value
+value1 = meanvarTMD(a,b,mu,Sigma,dist="normal")
+
+#MC estimate
+MC11 = MCmeanvarTMD(a,b,mu,Sigma,dist="normal") #by defalut n = 10000
+MC12 = MCmeanvarTMD(a,b,mu,Sigma,dist="normal",n = 10^5) #more precision
+
+## Skew-t case
+
+# Theoretical value
+value2 = meanvarTMD(a,b,mu,Sigma,lambda = c(-2,0,1),nu = 4,dist = "ST")
+
+#MC estimate
+MC21 = MCmeanvarTMD(a,b,mu,Sigma,lambda = c(-2,0,1),nu = 4,dist = "ST")
+
+## More...
+
+MC5 = MCmeanvarTMD(a,b,mu,Sigma,lambda = c(-2,0,1),tau = 1,dist = "ESN")
+MC6 = MCmeanvarTMD(a,b,mu,Sigma,lambda = c(-2,0,1),tau = 1,nu = 4,dist = "EST")
+
+\dontrun{
+  #Skew-unified Normal (SUN) and Skew-unified t (SUT) distributions
+  
+  Lambda = matrix(c(1,0,2,-3,0,-1),3,2) #A skewness matrix p times q
+  Gamma  = matrix(c(1,-0.5,-0.5,1),2,2) #A correlation matrix q times q
+  tau    = c(-1,2)                      #A vector of extension parameters of dim q
+  
+  MC7 = MCmeanvarTMD(a,b,mu,Sigma,lambda = Lambda,tau = c(-1,2),Gamma = Gamma,dist = "SUN")
+  MC8 = MCmeanvarTMD(a,b,mu,Sigma,lambda = Lambda,tau = c(-1,2),Gamma = Gamma,nu = 1,dist = "SUT")
+}

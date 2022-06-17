@@ -1,0 +1,230 @@
+library(MomTrunc)
+a = c(-0.8,-0.7,-0.6)
+b = c(0.5,0.6,0.7)
+mu = c(0.1,0.2,0.3)
+Sigma = S = matrix(data = c(1,0.2,0.3,0.2,1,0.4,0.3,0.4,1),
+               nrow = length(mu),ncol = length(mu),byrow = TRUE)
+value1 = meanvarTMD(a,b,mu,Sigma) #normal case
+
+meanvarN(a,b,mu,S)
+
+##############################################################################
+#VAIDA
+##############################################################################
+
+MomemNT<-function(u=c(0,0), S=diag(2), qc=c(1,2)) {
+  
+  nic=length(u)
+  
+  if (nic==1) {
+    
+    qq <- (1/sqrt(S))*(-qc+u)
+    R<-1
+    alpha <- pnorm(-qq)
+    
+    dd <- dnorm(-qq)
+    H <- qq*dd
+    EX <- (1/alpha)*dd   # a vector with a length of nic
+    EXX <- 1+1/alpha*H
+    varX <- EXX-EX^2
+    Eycens <- -sqrt(S)*EX+u
+    varyic<- varX*S
+    E2yy<-varyic+Eycens^2
+    
+  }
+  
+  else {
+    
+    qq <- diag(1/sqrt(diag(S)))%*%(-qc+u)
+    R <-  diag(1/sqrt(diag(S)))%*%S%*%diag(1/sqrt(diag(S)))
+    alpha <- pmvnorm(upper=as.vector(-qq), corr=R)
+    #print(qq)
+    dd <- rep(0, nic)   #derivative vector
+    
+    for (j in 1:nic){
+      V <- R[-j, -j, drop=F]-R[-j,j, drop=F]%*%R[j,-j, drop=F]
+      nu <- -qq[-j]+R[-j,j, drop=F]%*%qq[j]
+      dd[j] <- dnorm(-qq[j])*pmvnorm(upper=as.vector(nu), sigma=V)
+    }
+    
+    H <- matrix(rep(0, nic*nic), nrow=nic)
+    RH <- matrix(rep(0, nic*nic), nrow=nic)
+    
+    if(nic==2)     {
+      H[1,2] <- H[2,1] <- dmvnorm(-qq[c(1, 2)],sigma=matrix(c(1, R[1,2], R[2,1], 1), nrow=2))
+      #sigma==R since qq is standardized
+      RH[1,2] <- RH[2,1] <- R[1,2]*H[1,2]
+    }
+    else {
+      for( s in 1:(nic-1)){
+        for (t in (s+1):nic){
+          invR <- solve(R[c(s,t), c(s,t), drop=F])
+          nu <- -qq[-c(s,t)]+R[-c(s,t), c(s,t), drop=F]%*%invR%*%qq[c(s,t),,drop=F]
+          V <-  R[-c(s,t), -c(s,t), drop=F]- R[-c(s,t), c(s,t), drop=F]%*%invR%*%R[c(s,t), -c(s,t), drop=F]
+          H[s,t] <- H[t,s] <- pmvnorm(upper=as.vector(nu), sigma=V)*dmvnorm(-qq[c(s, t)],sigma=matrix(c(1, R[s,t], R[t,s], 1), nrow=2))
+          RH[s,t] <- RH[t,s] <- R[s,t]*H[s,t]
+        }
+      }
+    }
+    h <- qq*dd-apply(RH, 1, sum)
+    diag(H) <- h
+    EX <- (1/alpha)*R%*%dd   # a vector with a length of nic
+    EXX <- R+1/alpha*R%*%H%*%R
+    varX <- EXX-EX%*%t(EX)
+    Eycens <- -diag(sqrt(diag(S)))%*%EX+u
+    varyic <- diag(sqrt(diag(S)))%*%varX%*%diag(sqrt(diag(S)))
+    E2yy <- varyic+Eycens%*%t(Eycens)
+  }
+  
+  return(list(Ey=Eycens,Eyy=E2yy,Vary=varyic))
+}
+
+##############################################################################
+#MOMTRUNC OLD VERSION
+##############################################################################
+
+qfun = function(a,b,Sigma)
+{
+  n = length(a)
+  s = sqrt(diag(Sigma))
+  if(n==1){
+    qa = dnorm(a/s)/s
+    qb = dnorm(b/s)/s
+    return(list(qa = qa,qb = qb))
+  }
+  
+  qa = qb = rep(0,n)
+  for(i in 1:n){
+    if(a[i] != -Inf){
+      qa[i] = dnorm(x = a[i],mean = 0,sd = s[i])*pmvnorm(lower = a[-i],upper = b[-i],mean = Sigma[-i,i]/Sigma[i,i]*a[i],sigma = Sigma[-i,-i] - (Sigma[-i,i]/Sigma[i,i])%*%t(Sigma[i,-i]))
+    }
+    if(b[i] != Inf){
+      qb[i] = dnorm(x = b[i],mean = 0,sd = s[i])*pmvnorm(lower = a[-i],upper = b[-i],mean = Sigma[-i,i]/Sigma[i,i]*b[i],sigma = Sigma[-i,-i] - (Sigma[-i,i]/Sigma[i,i])%*%t(Sigma[i,-i]))
+    }
+  }
+  return(list(qa = qa,qb = qb))
+}
+
+meanvarNold = function(a,b,mu,Sigma){
+  n = length(mu)
+  s = sqrt(diag(Sigma))
+  if(n==1){
+    a1 = (a-mu)/s
+    b1 = (b-mu)/s
+    p = pnorm(b1)-pnorm(a1)
+    muY = mu+(dnorm(a1)-dnorm(b1))*s/p
+    if(a == -Inf){
+      a = 0
+    }
+    if(b == Inf){
+      b = 0
+    }
+    varY = Sigma+(mu-muY)*muY+(a*dnorm(a1)-b*dnorm(b1))*s/p
+    return(list(mean = round(muY,4),varcov = round(varY,4)))
+  }
+  seqq = seq_len(n)
+  a1 = a-mu
+  b1 = b-mu
+  p = pmvnorm(lower = a,upper = b,mean = mu,sigma = Sigma)
+  run = qfun(a = a1,b = b1,Sigma = Sigma)
+  qa = run$qa
+  qb = run$qb
+  q = qa-qb
+  muY = mu+ Sigma%*%q/p
+  D = matrix(0,n,n)
+  for(i in seqq){
+    if(a[i] != -Inf){
+      D[i,i] = a[i]*qa[i]
+    }
+    if(b[i] != Inf){
+      D[i,i] = D[i,i]-b[i]*qb[i]
+    }
+    RR = Sigma[-i,-i]-Sigma[-i,i]%*%t(Sigma[i,-i])/Sigma[i,i]
+    if(a[i] == -Inf){
+      wa = matrix(0,n-1,1)
+    }else
+    {
+      ma = mu[-i]+Sigma[-i,i]/Sigma[i,i]*a1[i]
+      run1 = qfun(a[-i]-ma,b[-i]-ma,RR)
+      qa1 = run1$qa
+      qb1 = run1$qb
+      wa = qa[i]*ma+dnorm(x = a[i],mean = mu[i],sd = s[i])*RR%*%(qa1-qb1)
+    }
+    if(b[i] == Inf){
+      wb = matrix(0,n-1,1)
+    }else
+    {
+      mb = mu[-i]+Sigma[-i,i]/Sigma[i,i]*b1[i]
+      run2 = qfun(a[-i]-mb,b[-i]-mb,RR)
+      qa2 = run2$qa
+      qb2 = run2$qb
+      wb = qb[i]*mb + dnorm(x = b[i],mean = mu[i],sd = s[i])*RR%*%(qa2-qb2)
+    }
+    D[i,-i] = wa-wb
+  }
+  varY = Sigma + Sigma%*%(D - q%*%t(muY))/p
+  varY = (varY + t(varY))/2
+  return(list(mean = round(muY,4),varcov = round(varY,4)))
+}
+
+##############################################################################
+#COMPARING ALL
+##############################################################################
+
+library(mvtnorm)
+
+mu = matrix(c(1:5/10))
+a = matrix(rep(-Inf,5),ncol = 1)
+b = mu+1
+S = Sigma = matrix(c(1,0.15,-0.2,0.5,0.3,0.15,1,0.3,-0.1,0.2,-0.2,0.3,1,0.1,-0.1,0.5,-0.1,0.1,1,0.7,0.3,0.2,-0.1,0.7,1),5,5)
+meanvarN(c(a),c(b),c(mu),S)
+
+library(rbenchmark)
+benchmark(meanvarN(c(a),c(b),c(mu),S),MomemNT(mu,S,b),meanvarNold(c(a),c(b),c(mu),S),
+          columns=c("test", "replications","elapsed", "relative"),
+          order="relative", replications=500)
+
+library(ggplot2)
+library(microbenchmark)
+compare <- microbenchmark(meanvarN(c(a),c(b),c(mu),S),MomemNT(mu,S,b),meanvarNold(c(a),c(b),c(mu),S),
+                          times = 500)
+
+compare <- microbenchmark(meanvarN(a,b,mu,S),MomemNT(mu,S,b),meanvarNold(c(a),c(b),c(mu),S),
+                          times = 2)
+
+#Comparing with new Rcpp MomTrunc version
+
+#library(matrixcalc)
+
+p = 50
+mu  = matrix(c(1:p/10))
+a = matrix(rep(-Inf,p),ncol = 1)
+b = mu+1
+s  = matrix(rnorm(p^2),p,p)
+S = Sigma = s%*%t(s)/10
+#is.positive.definite(S, tol=1e-8)
+
+a = c(a)
+b = c(b)
+mu = c(mu)
+
+meanvarN(c(a),c(b),c(mu),S);
+MomemNT(mu,S,b);
+meanvarNold(c(a),c(b),c(mu),S)
+
+
+
+# library(ggplot2)
+# library(microbenchmark)
+compare <- microbenchmark(meanvarN(c(a),c(b),c(mu),S),meanvarNold(c(a),c(b),c(mu),S),
+                          MomemNT(mu,S,b),
+                          times = 5000)
+
+benchmark(meanvarN(c(a),c(b),c(mu),S),MomemNT(mu,S,b),meanvarNold(c(a),c(b),c(mu),S),
+          columns=c("test", "replications","elapsed", "relative"),
+          order="relative", replications=500)
+
+compare
+
+autoplot(compare)
+?microbenchmark

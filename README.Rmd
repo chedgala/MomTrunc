@@ -1,0 +1,174 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "65%",
+  fig.align = "center"
+)
+```
+
+## Computation of truncated moments using the ```MomTrunc R``` package
+
+The ```MomTrunc R``` package computes arbitrary products moments (mean vector and variance-covariance matrix), for some doubly truncated (and folded) multivariate distributions. These distributions belong to the family of selection elliptical distributions, which includes well known skewed distributions as the unified skew-t distribution (SUT) and its particular cases. Methods for computing these moments are based on this seminal work.
+
+Next, we will show some useful functions related to some members of this family, which includes the extended skew-t (EST) and its particular cases, those are, the extended skew-normal (ESN), the skew-$t$ (ST), the skew-normal (SN), symmetric Student's-$t$ (MVT) and symmetric normal (MVN). 
+
+# Density, probabilities and random deviates
+
+These can be reached in the same fashion that other ```R``` base distributions, that is, using ```d```, ```p``` and ```r``` followed by the distribution string name to get the PDF, CDF and random generating functions, respectively.
+
+For instance, the extended skew-normal distribution, density values can be computed using ```dmvESN()``` probabilities with ```pmvESN()```, and ```rmvESN()``` functions return generation of random variables from our distributions of interest.
+
+Available string names are shown in the table below.
+
+```{r table2, echo=FALSE, message=FALSE, warnings=FALSE, results='asis'}
+tabl <- "
+| Distribution        | Option           | String  |
+|---------------|:-------------:|------:|
+| Skew-normal          | d, p, r  | mvSN |
+| Skew-t               | d, p, r      |   mvST |
+| Extended Skew-normal | d, p, r      | mvESN |
+| Extended Skew-t      | d, p, r      | mvEST |
+"
+cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
+```
+
+```{r dprESN}
+library(MomTrunc)
+
+#Univariate EST case
+dmvESN(x = -1,mu = 2,Sigma = 5,lambda = -2,tau = 0.5)
+sample = rmvEST(n = 1e5,mu = 2,Sigma = 5,lambda = -2,tau = 0.5,nu = 4)
+print(head(sample))
+
+#plotting
+hist(sample,breaks = 150,freq = FALSE,xlim = c(-15,10),main = "Histogram of EST variates")
+curve(expr = dmvEST(x,mu = 2,Sigma = 5,lambda = -2,tau = 0.5,nu = 4),
+      from = -15,to = 10,n = 200,lwd = 2,col = 4,add = TRUE)
+
+#Multivariate case
+mu = c(0.1,0.2,0.3,0.4)
+Sigma = matrix(data = c(1,0.2,0.3,0.1,0.2,1,0.4,-0.1,0.3,0.4,1,0.2,0.1,-0.1,0.2,1),
+               nrow = length(mu),ncol = length(mu),byrow = TRUE)
+lambda = c(-2,0,1,2)
+
+#One observation
+dmvSN(x = c(-2,-1,0,1),mu,Sigma,lambda) #Skew-normal 
+rmvST(n = 10,mu,Sigma,lambda,nu = 2) #Skew-t
+
+#Many observations as matrix
+x = matrix(rnorm(4*10),ncol = 4,byrow = TRUE)
+dmvST(x = x,mu,Sigma,lambda,nu = 2) #Skew-t
+
+# Probability between some points
+lower = rep(-5,4)
+upper = c(-1,0,2,5)
+pmvSN(lower,upper,mu,Sigma,lambda) #Skew-normal
+pmvST(lower,upper,mu,Sigma,lambda,nu=2) #Skew-t
+```
+
+The ```pmvSN()``` and ```pmvESN()``` functions offer the option to return the logarithm in base 2 of the probability, useful when the true probability is too small for the machine precision. These functions above use methods in Genz (1992) through the ```mvtnorm``` package (linked directly to our ```C++``` functions) and Cao et al. (2019) through the package ```tlrmvnmvt```.
+
+# Mean and variance-covariance matrix
+
+For this purpose, we call the function ```meanvarTMD()``` which returns the mean vector and variance-covariance matrix for some doubly truncated skew-elliptical distributions. It supports the \code{p}-variate Normal, Skew-normal (SN), Extended Skew-normal (ESN) and Unified Skew-normal (SUN) as well as the Student's-t, Skew-t (ST), Extended Skew-t (EST) and Unified Skew-t (SUT) distribution. The distribution to be used is set by the argument ```dist```. Next, we present some sample codes.
+
+```{r meanvar}
+a = c(-0.8,-0.7,-0.6)
+b = c(0.5,0.6,0.7)
+mu = c(0.1,0.2,0.3)
+Sigma = matrix(data = c(1,0.2,0.3,0.2,1,0.4,0.3,0.4,1),
+               nrow = length(mu),ncol = length(mu),byrow = TRUE)
+
+# Theoretical value
+value1 = meanvarTMD(a,b,mu,Sigma,dist="normal")
+
+#MC estimate
+MC11 = MCmeanvarTMD(a,b,mu,Sigma,dist="normal") #by defalut n = 10000
+MC12 = MCmeanvarTMD(a,b,mu,Sigma,dist="normal",n = 10^5) #more precision
+
+# Now works for for any nu>0
+value2 = meanvarTMD(a,b,mu,Sigma,dist = "t",nu = 0.87)
+
+value3 = meanvarTMD(a,b,mu,Sigma,lambda = c(-2,0,1),dist = "SN")
+value4 = meanvarTMD(a,b,mu,Sigma,lambda = c(-2,0,1),nu = 4,dist = "ST")
+value5 = meanvarTMD(a,b,mu,Sigma,lambda = c(-2,0,1),tau = 1,dist = "ESN")
+value6 = meanvarTMD(a,b,mu,Sigma,lambda = c(-2,0,1),tau = 1,nu = 4,dist = "EST")
+
+#Skew-unified Normal (SUN) and Skew-unified t (SUT) distributions
+
+Lambda = matrix(c(1,0,2,-3,0,-1),3,2) #A skewness matrix p times q
+Gamma  = matrix(c(1,-0.5,-0.5,1),2,2) #A correlation matrix q times q
+tau    = c(-1,2)                      #A vector of extension parameters of dim q
+
+value7 = meanvarTMD(a,b,mu,Sigma,lambda = Lambda,tau = c(-1,2),Gamma = Gamma,dist = "SUN")
+value8 = meanvarTMD(a,b,mu,Sigma,lambda = Lambda,tau = c(-1,2),Gamma = Gamma,nu = 4,dist = "SUT")
+
+
+#The ESN and EST as particular cases of the SUN and SUT for q=1
+
+Lambda = matrix(c(-2,0,1),3,1)
+Gamma  = 1
+value9 = meanvarTMD(a,b,mu,Sigma,lambda = Lambda,tau = 1,Gamma = Gamma,dist = "SUN")
+value10 = meanvarTMD(a,b,mu,Sigma,lambda = Lambda,tau = 1,Gamma = Gamma,nu = 4,dist = "SUT")
+
+round(value5$varcov,2) == round(value9$varcov,2)
+round(value6$varcov,2) == round(value10$varcov,2)
+```
+As noted in the codes above, it is possible to obtain the moments by Monte Carlo approximation through the ```MCmeanvarTMD()``` function.
+
+
+# High-order moments
+
+Finally, the ```momentsTMD``` provides the product moment for some truncated multivariate distributions.
+For instance, in order to compute the moment $$\mathbb{E}[Y_1^3 Y_2^1 Y_3^2\,|\,a_1 \leq Y_1 \leq b_1,\,a_2 \leq Y_2 \leq b_2,\,a_3 \leq Y_3 \leq b_3],$$ for $\mathbf{Y} = (Y_1,Y_2,Y_3)^\top \sim ESN_3(\boldsymbol{\mu},\boldsymbol{\Sigma},\boldsymbol{\lambda},\tau)$, we run the following code:
+
+```{r moments}
+momentsTMD(kappa = c(3,1,2),lower = a,upper = b,mu,Sigma,lambda = c(-2,0,1),tau = 1,dist = "ESN")
+```
+
+Note that some other lower order moments involved in the computation are also returned.
+
+
+## Folded distribution
+
+Functions for the folded cases are also offered to the users. The analogous functions ```meanvarFMD()```, ```momentsFMD()``` are used for the mean and variance-covariance matrix, and arbitrary product moments, respectively. Besides, the ```cdfFMD()``` computes the cdf. The available distributions are normal, Student-t, SN and ESN being set by the argument ```dist```. Some sample codes are shown next.
+
+```{r folded}
+mu = c(0.1,0.2,0.3,0.4)
+Sigma = matrix(data = c(1,0.2,0.3,0.1,0.2,1,0.4,-0.1,0.3,0.4,1,0.2,0.1,-0.1,0.2,1),
+               nrow = length(mu),ncol = length(mu),byrow = TRUE)
+
+#cdf
+cdfFMD(x = c(0.5,0.2,1.0,1.3),mu,Sigma,lambda = c(-2,0,2,1),dist = "SN")
+
+#Mean and variance-covariance matrix
+meanvarFMD(mu,Sigma,dist = "t",nu = 4)
+
+#Product moment c(2,0,1,2)
+momentsFMD(kappa = c(2,0,1,2),mu,Sigma,lambda = c(-2,0,2,1),tau = 1,dist = "ESN")
+```
+
+## References
+
+Cao, J., Genton, M. G., Keyes, D. E., & Turkiyyah, G. M. "Exploiting Low Rank Covariance Structures for Computing High-Dimensional Normal and Student- t Probabilities" (2019) <https://marcgenton.github.io/2019.CGKT.manuscript.pdf>
+
+Galarza, C. E., Lin, T. I., Wang, W. L., & Lachos, V. H. (2021). On moments of folded and truncated multivariate Student-t distributions based on recurrence relations. Metrika, 84(6), 825-850.
+
+Galarza-Morales, C. E., Matos, L. A., Dey, D. K., & Lachos, V. H. (2022a). "On moments of folded and doubly truncated multivariate extended skew-normal distributions." Journal of Computational and Graphical Statistics, 1-11 <doi:10.1080/10618600.2021.2000869>.
+
+Galarza, C. E., Matos, L. A., Castro, L. M., & Lachos, V. H. (2022b). Moments of the doubly truncated selection elliptical distributions with emphasis on the unified multivariate skew-t distribution. Journal of Multivariate Analysis, 189, 104944 <doi:10.1016/j.jmva.2021.104944>.
+
+Genz, A. (1992), "Numerical computation of multivariate
+normal probabilities," Journal of Computational and
+Graphical Statistics, 1, 141-149.
+
+Kan, R., & Robotti, C. (2017). On moments of folded and truncated multivariate normal distributions. Journal of Computational and Graphical Statistics, 26(4), 930-934.

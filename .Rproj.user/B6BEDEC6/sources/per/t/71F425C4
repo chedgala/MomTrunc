@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1523598634709.000,
+    "dirty" : false,
+    "encoding" : "ISO8859-1",
+    "folds" : "1311|47|1350|0|\n1355|65|1370|0|\n1375|57|1419|0|\n1424|69|1436|3|\n1441|65|1463|0|\n1547|88|1553|0|\n",
+    "hash" : "987908772",
+    "id" : "71F425C4",
+    "lastKnownWriteTime" : 1540354765,
+    "last_content_update" : 1540354765526,
+    "path" : "C:/Users/ra143711/Desktop/drafts/New package/v2/MomTrunc/src/my_functions.cpp",
+    "project_path" : "src/my_functions.cpp",
+    "properties" : {
+        "cursorPosition" : "294,59",
+        "scrollLine" : "290",
+        "source_window_id" : ""
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "cpp"
+}

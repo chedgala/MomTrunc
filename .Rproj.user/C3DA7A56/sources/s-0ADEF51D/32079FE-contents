@@ -1,0 +1,7 @@
+library(rhub)
+
+rhub::check()
+12
+#6
+
+devtools::build_readme()

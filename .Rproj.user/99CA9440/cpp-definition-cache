@@ -1,0 +1,311 @@
+[
+    {
+        "definitions" : [
+            {
+                "column" : 7,
+                "file" : "C:/Users/ceg18007/Dropbox/drafts/New package/v2/MomTrunc/src/MultiVariateNormal.h",
+                "kind" : 2,
+                "line" : 6,
+                "name" : "MultiVariateNormal",
+                "parent_name" : "",
+                "usr" : "c:@C@MultiVariateNormal"
+            }
+        ],
+        "file" : "C:/Users/ceg18007/Dropbox/drafts/New package/v2/MomTrunc/src/MultiVariateNormal.h",
+        "file_last_write" : 1393845804
+    },
+    {
+        "definitions" : [
+            {
+                "column" : 8,
+                "file" : "C:/Users/ceg18007/Dropbox/drafts/New package/v2/MomTrunc/src/mvtnorm.cpp",
+                "kind" : 6,
+                "line" : 24,
+                "name" : "pmvnorm(int *, int *, double *, double *, int *, double *, double *, int *, double *, double *, double *, double *, int *)",
+                "parent_name" : "",
+                "usr" : "c:@F@pmvnorm"
+            },
+            {
+                "column" : 8,
+                "file" : "C:/Users/ceg18007/Dropbox/drafts/New package/v2/MomTrunc/src/mvtnorm.cpp",
+                "kind" : 6,
+                "line" : 56,
+                "name" : "pmvt_P(int, int, double *, double *, double *)",
+                "parent_name" : "",
+                "usr" : "c:@F@pmvt_P"
+            },
+            {
+                "column" : 8,
+                "file" : "C:/Users/ceg18007/Dropbox/drafts/New package/v2/MomTrunc/src/mvtnorm.cpp",
+                "kind" : 6,
+                "line" : 89,
+                "name" : "pmvt(int, int, double *, double *, double *, double *)",
+                "parent_name" : "",
+                "usr" : "c:@F@pmvt"
+            }
+        ],
+        "file" : "C:/Users/ceg18007/Dropbox/drafts/New package/v2/MomTrunc/src/mvtnorm.cpp",
+        "file_last_write" : 1523613413
+    },
+    {
+        "definitions" : [
+        ],
+        "file" : "C:/Users/ceg18007/Dropbox/drafts/New package/v2/MomTrunc/src/mvtnorm.h",
+        "file_last_write" : 1523609730
+    },
+    {
+        "definitions" : [
+            {
+                "column" : 8,
+                "file" : "C:/Users/ceg18007/Dropbox/drafts/New package/v2/MomTrunc/src/my_functions.cpp",
+                "kind" : 6,
+                "line" : 14,
+                "name" : "fact(int)",
+                "parent_name" : "",
+                "usr" : "c:@F@fact#I#"
+            },
+            {
+                "column" : 8,
+                "file" : "C:/Users/ceg18007/Dropbox/drafts/New package/v2/MomTrunc/src/my_functions.cpp",
+                "kind" : 6,
+                "line" : 27,
+                "name" : "binom(int, int)",
+                "parent_name" : "",
+                "usr" : "c:@F@binom#I#I#"
+            },
+            {
+                "column" : 14,
+                "file" : "C:/Users/ceg18007/Dropbox/drafts/New package/v2/MomTrunc/src/my_functions.cpp",
+                "kind" : 6,
+                "line" : 37,
+                "name" : "rep_each(const arma::colvec &, int)",
+                "parent_name" : "",
+                "usr" : "c:@F@rep_each#&1$@N@arma@C@Col>#d#I#"
+            },
+            {
+                "column" : 14,
+                "file" : "C:/Users/ceg18007/Dropbox/drafts/New package/v2/MomTrunc/src/my_functions.cpp",
+                "kind" : 6,
+                "line" : 46,
+                "name" : "rep_times(const arma::colvec &, int)",
+                "parent_name" : "",
+                "usr" : "c:@F@rep_times#&1$@N@arma@C@Col>#d#I#"
+            },
+            {
+                "column" : 9,
+                "file" : "C:/Users/ceg18007/Dropbox/drafts/New package/v2/MomTrunc/src/my_functions.cpp",
+                "kind" : 6,
+                "line" : 55,
+                "name" : "lowertriang(NumericMatrix)",
+                "parent_name" : "",
+                "usr" : "c:@F@lowertriang#$@N@Rcpp@C@Matrix>#VI14#@N@Rcpp@CT>1#T@PreserveStorage#"
+            },
+            {
+                "column" : 15,
+                "file" : "C:/Users/ceg18007/Dropbox/drafts/New package/v2/MomTrunc/src/my_functions.cpp",
+                "kind" : 6,
+                "line" : 73,
+                "name" : "vecpow(const NumericVector, const IntegerVector)",
+                "parent_name" : "",
+                "usr" : "c:@F@vecpow#1$@N@Rcpp@C@Vector>#VI14#@N@Rcpp@CT>1#T@PreserveStorage#1$@N@Rcpp@C@Vector>#VI13#@N@Rcpp@CT>1#T@PreserveStorage#"
+            },
+            {
+                "column" : 14,
+                "file" : "C:/Users/ceg18007/Dropbox/drafts/New package/v2/MomTrunc/src/my_functions.cpp",
+                "kind" : 6,
+                "line" : 82,
+                "name" : "DecToSigns(int, int)",
+                "parent_name" : "",
+                "usr" : "c:@F@DecToSigns#I#I#"
+            },
+            {
+                "column" : 11,
+                "file" : "C:/Users/ceg18007/Dropbox/drafts/New package/v2/MomTrunc/src/my_functions.cpp",
+                "kind" : 6,
+                "line" : 99,
+                "name" : "mygrid(const arma::vec)",
+                "parent_name" : "",
+                "usr" : "c:@F@mygrid#1$@N@arma@C@Col>#d#"
+            },
+            {
+                "column" : 12,
+                "file" : "C:/Users/ceg18007/Dropbox/drafts/New package/v2/MomTrunc/src/my_functions.cpp",
+                "kind" : 6,
+                "line" : 118,
+                "name" : "genColex(int, int, int, arma::mat, arma::rowvec, int)",
+                "parent_name" : "",
+                "usr" : "c:@F@genColex#I#I#I#$@N@arma@C@Mat>#d#$@N@arma@C@Row>#d#I#"
+            },
+            {
+                "column" : 11,
+                "file" : "C:/Users/ceg18007/Dropbox/drafts/New package/v2/MomTrunc/src/my_functions.cpp",
+                "kind" : 6,
+                "line" : 139,
+                "name" : "colex(int, int, int)",
+                "parent_name" : "",
+                "usr" : "c:@F@colex#I#I#I#"
+            },
+            {
+                "column" : 12,
+                "file" : "C:/Users/ceg18007/Dropbox/drafts/New package/v2/MomTrunc/src/my_functions.cpp",
+                "kind" : 6,
+                "line" : 167,
+                "name" : "colexind2(arma::mat, arma::mat)",
+                "parent_name" : "",
+                "usr" : "c:@F@colexind2#$@N@arma@C@Mat>#d#S0_#"
+            },
+            {
+                "column" : 8,
+                "file" : "C:/Users/ceg18007/Dropbox/drafts/New package/v2/MomTrunc/src/my_functions.cpp",
+                "kind" : 6,
+                "line" : 241,
+                "name" : "FmvtRcpp(NumericVector, NumericMatrix, int)",
+                "parent_name" : "",
+                "usr" : "c:@F@FmvtRcpp#$@N@Rcpp@C@Vector>#VI14#@N@Rcpp@CT>1#T@PreserveStorage#$@N@Rcpp@C@Matrix>#VI14#@N@Rcpp@CT>1#T@PreserveStorage#I#"
+            },
+            {
+                "column" : 8,
+                "file" : "C:/Users/ceg18007/Dropbox/drafts/New package/v2/MomTrunc/src/my_functions.cpp",
+                "kind" : 6,
+                "line" : 253,
+                "name" : "pmvtRcpp(NumericVector, NumericVector, NumericMatrix, int)",
+                "parent_name" : "",
+                "usr" : "c:@F@pmvtRcpp#$@N@Rcpp@C@Vector>#VI14#@N@Rcpp@CT>1#T@PreserveStorage#S0_#$@N@Rcpp@C@Matrix>#VI14#@N@Rcpp@CT>1#T@PreserveStorage#I#"
+            },
+            {
+                "column" : 12,
+                "file" : "C:/Users/ceg18007/Dropbox/drafts/New package/v2/MomTrunc/src/my_functions.cpp",
+                "kind" : 6,
+                "line" : 267,
+                "name" : "qfun(arma::vec, arma::vec, arma::mat)",
+                "parent_name" : "",
+                "usr" : "c:@F@qfun#$@N@arma@C@Col>#d#S0_#$@N@arma@C@Mat>#d#"
+            },
+            {
+                "column" : 11,
+                "file" : "C:/Users/ceg18007/Dropbox/drafts/New package/v2/MomTrunc/src/my_functions.cpp",
+                "kind" : 6,
+                "line" : 318,
+                "name" : "recintab0(arma::vec, arma::vec, arma::vec, arma::vec, arma::mat)",
+                "parent_name" : "",
+                "usr" : "c:@F@recintab0#$@N@arma@C@Col>#d#S0_#S0_#S0_#$@N@arma@C@Mat>#d#"
+            },
+            {
+                "column" : 12,
+                "file" : "C:/Users/ceg18007/Dropbox/drafts/New package/v2/MomTrunc/src/my_functions.cpp",
+                "kind" : 6,
+                "line" : 428,
+                "name" : "recintab1(arma::vec, arma::vec, arma::vec, arma::vec, arma::mat)",
+                "parent_name" : "",
+                "usr" : "c:@F@recintab1#$@N@arma@C@Col>#d#S0_#S0_#S0_#$@N@arma@C@Mat>#d#"
+            },
+            {
+                "column" : 11,
+                "file" : "C:/Users/ceg18007/Dropbox/drafts/New package/v2/MomTrunc/src/my_functions.cpp",
+                "kind" : 6,
+                "line" : 799,
+                "name" : "ifunrec02(int, arma::vec, arma::mat, double)",
+                "parent_name" : "",
+                "usr" : "c:@F@ifunrec02#I#$@N@arma@C@Col>#d#$@N@arma@C@Mat>#d#d#"
+            },
+            {
+                "column" : 12,
+                "file" : "C:/Users/ceg18007/Dropbox/drafts/New package/v2/MomTrunc/src/my_functions.cpp",
+                "kind" : 6,
+                "line" : 1186,
+                "name" : "ifunrec2(int, arma::vec, arma::mat, double)",
+                "parent_name" : "",
+                "usr" : "c:@F@ifunrec2#I#$@N@arma@C@Col>#d#$@N@arma@C@Mat>#d#d#"
+            },
+            {
+                "column" : 12,
+                "file" : "C:/Users/ceg18007/Dropbox/drafts/New package/v2/MomTrunc/src/my_functions.cpp",
+                "kind" : 6,
+                "line" : 1313,
+                "name" : "meanvarFN(arma::vec, arma::mat)",
+                "parent_name" : "",
+                "usr" : "c:@F@meanvarFN#$@N@arma@C@Col>#d#$@N@arma@C@Mat>#d#"
+            },
+            {
+                "column" : 12,
+                "file" : "C:/Users/ceg18007/Dropbox/drafts/New package/v2/MomTrunc/src/my_functions.cpp",
+                "kind" : 6,
+                "line" : 1357,
+                "name" : "momentsFN(arma::vec, arma::vec, arma::mat)",
+                "parent_name" : "",
+                "usr" : "c:@F@momentsFN#$@N@arma@C@Col>#d#S0_#$@N@arma@C@Mat>#d#"
+            },
+            {
+                "column" : 12,
+                "file" : "C:/Users/ceg18007/Dropbox/drafts/New package/v2/MomTrunc/src/my_functions.cpp",
+                "kind" : 6,
+                "line" : 1377,
+                "name" : "meanvarFT(arma::vec, arma::mat, double)",
+                "parent_name" : "",
+                "usr" : "c:@F@meanvarFT#$@N@arma@C@Col>#d#$@N@arma@C@Mat>#d#d#"
+            },
+            {
+                "column" : 11,
+                "file" : "C:/Users/ceg18007/Dropbox/drafts/New package/v2/MomTrunc/src/my_functions.cpp",
+                "kind" : 6,
+                "line" : 1443,
+                "name" : "momentsFT(int, arma::vec, arma::mat, double)",
+                "parent_name" : "",
+                "usr" : "c:@F@momentsFT#I#$@N@arma@C@Col>#d#$@N@arma@C@Mat>#d#d#"
+            },
+            {
+                "column" : 12,
+                "file" : "C:/Users/ceg18007/Dropbox/drafts/New package/v2/MomTrunc/src/my_functions.cpp",
+                "kind" : 6,
+                "line" : 1471,
+                "name" : "meanvarN(arma::vec, arma::vec, arma::vec, arma::mat)",
+                "parent_name" : "",
+                "usr" : "c:@F@meanvarN#$@N@arma@C@Col>#d#S0_#S0_#$@N@arma@C@Mat>#d#"
+            },
+            {
+                "column" : 12,
+                "file" : "C:/Users/ceg18007/Dropbox/drafts/New package/v2/MomTrunc/src/my_functions.cpp",
+                "kind" : 6,
+                "line" : 1549,
+                "name" : "momentsN(arma::vec, arma::vec, arma::vec, arma::vec, arma::mat)",
+                "parent_name" : "",
+                "usr" : "c:@F@momentsN#$@N@arma@C@Col>#d#S0_#S0_#S0_#$@N@arma@C@Mat>#d#"
+            }
+        ],
+        "file" : "C:/Users/ceg18007/Dropbox/drafts/New package/v2/MomTrunc/src/my_functions.cpp",
+        "file_last_write" : 1541791363
+    },
+    {
+        "definitions" : [
+            {
+                "column" : 6,
+                "file" : "C:/Users/ceg18007/Dropbox/drafts/New package/v2/MomTrunc/src/randomF77.c",
+                "kind" : 6,
+                "line" : 16,
+                "name" : "rndstart_",
+                "parent_name" : "",
+                "usr" : "c:@F@rndstart_#"
+            },
+            {
+                "column" : 6,
+                "file" : "C:/Users/ceg18007/Dropbox/drafts/New package/v2/MomTrunc/src/randomF77.c",
+                "kind" : 6,
+                "line" : 17,
+                "name" : "rndend_",
+                "parent_name" : "",
+                "usr" : "c:@F@rndend_#"
+            },
+            {
+                "column" : 8,
+                "file" : "C:/Users/ceg18007/Dropbox/drafts/New package/v2/MomTrunc/src/randomF77.c",
+                "kind" : 6,
+                "line" : 18,
+                "name" : "unifrnd_",
+                "parent_name" : "",
+                "usr" : "c:@F@unifrnd_#"
+            }
+        ],
+        "file" : "C:/Users/ceg18007/Dropbox/drafts/New package/v2/MomTrunc/src/randomF77.c",
+        "file_last_write" : 1393845804
+    }
+]

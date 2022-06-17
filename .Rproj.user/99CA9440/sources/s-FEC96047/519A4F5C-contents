@@ -1,0 +1,217 @@
+//*************************************************************************
+  //Q-FUNCTION FOR THE MEAN-VAR FOR TRUNCATED NORMAL CASE
+Rcpp::List qfun(arma::vec a,arma::vec b,arma::mat S){
+  Rcpp::List out;
+  int n = a.n_elem;
+  arma::colvec s = sqrt(arma::diagvec(S));
+  if(n==1){
+    double s1 = s[0];
+    double aa = a[0]/s1;
+    double bb = b[0]/s1;
+    double qa = R::dnorm(aa,0,1,0)/s1;
+    double qb = R::dnorm(bb,0,1,0)/s1;
+    out["qa"] = qa;
+    out["qb"] = qb;
+    return out;
+  }else{
+    arma::vec qa(n,arma::fill::zeros);
+    arma::vec qb(n,arma::fill::zeros);
+    arma::uvec seqq = arma::linspace<arma::uvec>(1,n,n);
+    double da, db;
+    arma::uvec ii(1);
+    for(int i=1; i<=n; ++i){
+      ii = i;
+      arma::uvec ind2 = seqq.elem(find(seqq != i));
+      arma::mat SSi = S(ind2-1,ind2-1)-S(ind2-1,ii-1)*S(ii-1,ind2-1)/arma::as_scalar(S(ii-1,ii-1));
+      arma::colvec si = sqrt(arma::diagvec(SSi));
+      arma::mat Ri = SSi%(1/(si * si.t()));
+      NumericMatrix Wi = wrap(Ri);
+      if(std::isfinite(a(i-1))){
+        da = R::dnorm(a(i-1),0,s(i-1),0);
+        arma::vec mai = S(ind2-1,ii-1)/S(i-1,i-1)*a(i-1);
+        Rcpp::NumericVector haia = Rcpp::wrap((a(ind2-1)-mai)/si);
+        Rcpp::NumericVector hbia = Rcpp::wrap((b(ind2-1)-mai)/si);
+        qa(i-1) = da*pmvtRcpp(haia,hbia,Wi,0);
+        //qa(i-1) = da;
+      } 
+      if(std::isfinite(b(i-1))){
+        db = R::dnorm(b(i-1),0,s(i-1),0);
+        arma::vec mbi = S(ind2-1,ii-1)/S(i-1,i-1)*b(i-1);
+        Rcpp::NumericVector haib = Rcpp::wrap((a(ind2-1)-mbi)/si);
+        Rcpp::NumericVector hbib = Rcpp::wrap((b(ind2-1)-mbi)/si);
+        qb(i-1) = db*pmvtRcpp(haib,hbib,Wi,0);
+        //qb(i-1) = db;
+      } 
+    }
+    out["qa"] = qa;
+    out["qb"] = qb;
+    return out;
+  }
+}
+
+//*************************************************************************
+  //MEANVAR -> TRUNCATED -> NORMAL
+// [[Rcpp::export]]
+Rcpp::List meanvarN(arma::vec a,arma::vec b,arma::vec mu,arma::mat S){
+  Rcpp::List out;
+  int n = mu.n_elem;
+  arma::colvec s = sqrt(arma::diagvec(S));
+  if(n==1){
+    double a0 = arma::as_scalar(a);
+    double b0 = arma::as_scalar(b);
+    double mu0 = arma::as_scalar(mu);
+    double S0 = arma::as_scalar(S);
+    double s1 = sqrt(S0);
+    double a1 = (a0-mu0)/s1;
+    double b1 = (b0-mu0)/s1;
+    double p = R::pnorm(b1,0,1,1,0) - R::pnorm(a1,0,1,1,0);
+    double muY = mu0 + (R::dnorm(a1,0,1,0) - R::dnorm(b1,0,1,0))*s1/p;
+    if(std::isinf(a0)){a0 = 0;}
+    if(std::isinf(b0)){b0 = 0;}
+    double varY = S0 +(mu0-muY)*muY+(a0*R::dnorm(a1,0,1,0)-b0*R::dnorm(b1,0,1,0))*s1/p;
+    out["muY"] = muY;
+    out["varY"] = varY;
+    return out;
+  }else{
+    arma::vec muY(n);
+    arma::mat varY(n,n);
+    arma::uvec seqq = arma::linspace<arma::uvec>(1,n,n);
+    arma::vec a1 = a-mu;
+    arma::vec b1 = b-mu;
+    Rcpp::NumericVector ha = Rcpp::wrap(a1/s);
+    Rcpp::NumericVector hb = Rcpp::wrap(b1/s);
+    arma::mat R = S%(1/(s * s.t()));
+    NumericMatrix W = Rcpp::wrap(R);
+    double p = pmvtRcpp(ha,hb,W,0);
+    //double p = 1;
+    Rcpp::List run = qfun(a1,b1,S);
+    arma::vec qa = run["qa"];
+    arma::vec qb = run["qb"];
+    arma::vec q = qa-qb;
+    muY = mu + S*q/p;
+    arma::mat D(n,n,arma::fill::zeros);
+    arma::uvec ii(1);
+    arma::vec wa(n-1,arma::fill::zeros);
+    arma::vec wb(n-1,arma::fill::zeros);
+    double da, db;
+    arma::vec mai,mbi;
+    for(int i=1; i<=n; ++i){
+      ii = i;
+      arma::uvec ind2 = seqq.elem(find(seqq != i));
+      arma::mat SSi = S(ind2-1,ind2-1)-S(ind2-1,ii-1)*S(ii-1,ind2-1)/arma::as_scalar(S(ii-1,ii-1));
+      if(std::isfinite(a(i-1))){
+        D(i-1,i-1) = a(i-1)*qa(i-1);
+        mai = mu(ind2-1) + S(ind2-1,ii-1)/S(i-1,i-1)*a1(i-1);
+        Rcpp::List run1 = qfun(a(ind2-1)-mai,b(ind2-1)-mai,SSi);
+        arma::vec qa1 = run1["qa"];
+        arma::vec qb1 = run1["qb"];
+        da = R::dnorm(a(i-1),mu(i-1),s(i-1),0);
+        wa = qa(i-1)*mai + da*SSi*(qa1-qb1);
+      } 
+      if(std::isfinite(b(i-1))){
+        D(i-1,i-1) -= b(i-1)*qb(i-1);
+        mbi = mu(ind2-1) + S(ind2-1,ii-1)/S(i-1,i-1)*b1(i-1);
+        Rcpp::List run2 = qfun(a(ind2-1)-mbi,b(ind2-1)-mbi,SSi);
+        arma::vec qa2 = run2["qa"];
+        arma::vec qb2 = run2["qb"];
+        db = R::dnorm(b(i-1),mu(i-1),s(i-1),0);
+        wb = qb(i-1)*mbi + db*SSi*(qa2-qb2);
+      }
+      D(ii-1,ind2-1) = wa.t()-wb.t();
+    }
+    varY = S + S*(D - q*muY.t())/p;
+    varY = (varY + varY.t())/2;
+    out["muY"] = muY;
+    out["varY"] = varY;
+    return out;
+  }
+}
+
+
+##############################################################################
+#MOMTRUNC OLD VERSION
+##############################################################################
+
+qfun = function(a,b,Sigma)
+{
+  n = length(a)
+  s = sqrt(diag(Sigma))
+  if(n==1){
+    qa = dnorm(a/s)/s
+    qb = dnorm(b/s)/s
+    return(list(qa = qa,qb = qb))
+  }
+  
+  qa = qb = rep(0,n)
+  for(i in 1:n){
+    if(a[i] != -Inf){
+      qa[i] = dnorm(x = a[i],mean = 0,sd = s[i])*pmvnorm(lower = a[-i],upper = b[-i],mean = Sigma[-i,i]/Sigma[i,i]*a[i],sigma = Sigma[-i,-i] - (Sigma[-i,i]/Sigma[i,i])%*%t(Sigma[i,-i]))
+    }
+    if(b[i] != Inf){
+      qb[i] = dnorm(x = b[i],mean = 0,sd = s[i])*pmvnorm(lower = a[-i],upper = b[-i],mean = Sigma[-i,i]/Sigma[i,i]*b[i],sigma = Sigma[-i,-i] - (Sigma[-i,i]/Sigma[i,i])%*%t(Sigma[i,-i]))
+    }
+  }
+  return(list(qa = qa,qb = qb))
+}
+
+meanvarNold = function(a,b,mu,Sigma){
+  n = length(mu)
+  s = sqrt(diag(Sigma))
+  if(n==1){
+    a1 = (a-mu)/s
+    b1 = (b-mu)/s
+    p = pnorm(b1)-pnorm(a1)
+    muY = mu+(dnorm(a1)-dnorm(b1))*s/p
+    if(a == -Inf){
+      a = 0
+    }
+    if(b == Inf){
+      b = 0
+    }
+    varY = Sigma+(mu-muY)*muY+(a*dnorm(a1)-b*dnorm(b1))*s/p
+    return(list(mean = round(muY,4),varcov = round(varY,4)))
+  }
+  seqq = seq_len(n)
+  a1 = a-mu
+  b1 = b-mu
+  p = pmvnorm(lower = a,upper = b,mean = mu,sigma = Sigma)
+  run = qfun(a = a1,b = b1,Sigma = Sigma)
+  qa = run$qa
+  qb = run$qb
+  q = qa-qb
+  muY = mu+ Sigma%*%q/p
+  D = matrix(0,n,n)
+  for(i in seqq){
+    if(a[i] != -Inf){
+      D[i,i] = a[i]*qa[i]
+    }
+    if(b[i] != Inf){
+      D[i,i] = D[i,i]-b[i]*qb[i]
+    }
+    RR = Sigma[-i,-i]-Sigma[-i,i]%*%t(Sigma[i,-i])/Sigma[i,i]
+    if(a[i] == -Inf){
+      wa = matrix(0,n-1,1)
+    }else
+    {
+      ma = mu[-i]+Sigma[-i,i]/Sigma[i,i]*a1[i]
+      run1 = qfun(a[-i]-ma,b[-i]-ma,RR)
+      qa1 = run1$qa
+      qb1 = run1$qb
+      wa = qa[i]*ma+dnorm(x = a[i],mean = mu[i],sd = s[i])*RR%*%(qa1-qb1)
+    }
+    if(b[i] == Inf){
+      wb = matrix(0,n-1,1)
+    }else
+    {
+      mb = mu[-i]+Sigma[-i,i]/Sigma[i,i]*b1[i]
+      run2 = qfun(a[-i]-mb,b[-i]-mb,RR)
+      qa2 = run2$qa
+      qb2 = run2$qb
+      wb = qb[i]*mb + dnorm(x = b[i],mean = mu[i],sd = s[i])*RR%*%(qa2-qb2)
+    }
+    D[i,-i] = wa-wb
+  }
+  varY = Sigma + Sigma%*%(D - q%*%t(muY))/p
+  varY = (varY + t(varY))/2
+  return(list(mean = round(muY,4),varcov = round(varY,4)))
+}
