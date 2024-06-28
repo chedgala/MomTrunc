@@ -1,5 +1,308 @@
 [
     {
+        "file": "C:/Users/cgala/Documents/GitHub/MomTrunc/src/my_functions.cpp",
+        "file_last_write": 1613246180.0,
+        "definitions": [
+            {
+                "usr": "c:@F@TT_GS_sp#I#I#d#I#I#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "TT_GS_sp(int, int, double, int, int, int)",
+                "file": "C:/Users/cgala/Documents/GitHub/MomTrunc/src/my_functions.cpp",
+                "line": 18,
+                "column": 11
+            },
+            {
+                "usr": "c:@F@triangl#&1I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "triangl(const int &)",
+                "file": "C:/Users/cgala/Documents/GitHub/MomTrunc/src/my_functions.cpp",
+                "line": 59,
+                "column": 11
+            },
+            {
+                "usr": "c:@F@Fpmvt_cpp#&I#S0_#I#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "Fpmvt_cpp(int &, int &, int, double)",
+                "file": "C:/Users/cgala/Documents/GitHub/MomTrunc/src/my_functions.cpp",
+                "line": 71,
+                "column": 8
+            },
+            {
+                "usr": "c:@F@pmvt_cpp#&I#S0_#S0_#I#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "pmvt_cpp(int &, int &, int &, int, double)",
+                "file": "C:/Users/cgala/Documents/GitHub/MomTrunc/src/my_functions.cpp",
+                "line": 112,
+                "column": 8
+            },
+            {
+                "usr": "c:@F@fact#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "fact(int)",
+                "file": "C:/Users/cgala/Documents/GitHub/MomTrunc/src/my_functions.cpp",
+                "line": 167,
+                "column": 8
+            },
+            {
+                "usr": "c:@F@binom#I#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "binom(int, int)",
+                "file": "C:/Users/cgala/Documents/GitHub/MomTrunc/src/my_functions.cpp",
+                "line": 180,
+                "column": 8
+            },
+            {
+                "usr": "c:@F@rep_each#&1I#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "rep_each(const int &, int)",
+                "file": "C:/Users/cgala/Documents/GitHub/MomTrunc/src/my_functions.cpp",
+                "line": 190,
+                "column": 14
+            },
+            {
+                "usr": "c:@F@rep_times#&1I#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "rep_times(const int &, int)",
+                "file": "C:/Users/cgala/Documents/GitHub/MomTrunc/src/my_functions.cpp",
+                "line": 199,
+                "column": 14
+            },
+            {
+                "usr": "c:@S@pow_wrapper",
+                "kind": 3,
+                "parent_name": "",
+                "name": "pow_wrapper",
+                "file": "C:/Users/cgala/Documents/GitHub/MomTrunc/src/my_functions.cpp",
+                "line": 210,
+                "column": 8
+            },
+            {
+                "usr": "c:@S@pow_wrapper@F@operator()#d#d#",
+                "kind": 7,
+                "parent_name": "pow_wrapper",
+                "name": "operator(double, double)",
+                "file": "C:/Users/cgala/Documents/GitHub/MomTrunc/src/my_functions.cpp",
+                "line": 211,
+                "column": 18
+            },
+            {
+                "usr": "c:@F@vecpow#1I#1I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "vecpow(const int, const int)",
+                "file": "C:/Users/cgala/Documents/GitHub/MomTrunc/src/my_functions.cpp",
+                "line": 216,
+                "column": 15
+            },
+            {
+                "usr": "c:@F@DecToSigns#I#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "DecToSigns(int, int)",
+                "file": "C:/Users/cgala/Documents/GitHub/MomTrunc/src/my_functions.cpp",
+                "line": 225,
+                "column": 14
+            },
+            {
+                "usr": "c:@F@mygrid#1I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "mygrid(const int)",
+                "file": "C:/Users/cgala/Documents/GitHub/MomTrunc/src/my_functions.cpp",
+                "line": 243,
+                "column": 11
+            },
+            {
+                "usr": "c:@F@genColex#I#I#I#I#I#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "genColex(int, int, int, int, int, int)",
+                "file": "C:/Users/cgala/Documents/GitHub/MomTrunc/src/my_functions.cpp",
+                "line": 262,
+                "column": 12
+            },
+            {
+                "usr": "c:@F@colex#I#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "colex(int, int)",
+                "file": "C:/Users/cgala/Documents/GitHub/MomTrunc/src/my_functions.cpp",
+                "line": 282,
+                "column": 11
+            },
+            {
+                "usr": "c:@F@colexind2#I#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "colexind2(int, int)",
+                "file": "C:/Users/cgala/Documents/GitHub/MomTrunc/src/my_functions.cpp",
+                "line": 296,
+                "column": 12
+            },
+            {
+                "usr": "c:@F@Rcppqfun#I#I#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "Rcppqfun(int, int, int)",
+                "file": "C:/Users/cgala/Documents/GitHub/MomTrunc/src/my_functions.cpp",
+                "line": 321,
+                "column": 12
+            },
+            {
+                "usr": "c:@F@Rcppqfun_ab#I#I#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "Rcppqfun_ab(int, int, int)",
+                "file": "C:/Users/cgala/Documents/GitHub/MomTrunc/src/my_functions.cpp",
+                "line": 372,
+                "column": 12
+            },
+            {
+                "usr": "c:@F@Rcppqfun_b#I#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "Rcppqfun_b(int, int)",
+                "file": "C:/Users/cgala/Documents/GitHub/MomTrunc/src/my_functions.cpp",
+                "line": 420,
+                "column": 11
+            },
+            {
+                "usr": "c:@F@recintab0#I#I#I#I#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "recintab0(int, int, int, int, int)",
+                "file": "C:/Users/cgala/Documents/GitHub/MomTrunc/src/my_functions.cpp",
+                "line": 455,
+                "column": 11
+            },
+            {
+                "usr": "c:@F@recintab1#I#I#I#I#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "recintab1(int, int, int, int, int)",
+                "file": "C:/Users/cgala/Documents/GitHub/MomTrunc/src/my_functions.cpp",
+                "line": 566,
+                "column": 12
+            },
+            {
+                "usr": "c:@F@ifunrec02#I#I#I#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "ifunrec02(int, int, int, double)",
+                "file": "C:/Users/cgala/Documents/GitHub/MomTrunc/src/my_functions.cpp",
+                "line": 939,
+                "column": 11
+            },
+            {
+                "usr": "c:@F@ifunrec2#I#I#I#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "ifunrec2(int, int, int, double)",
+                "file": "C:/Users/cgala/Documents/GitHub/MomTrunc/src/my_functions.cpp",
+                "line": 1332,
+                "column": 12
+            },
+            {
+                "usr": "c:@F@RcppmeanvarFN#I#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "RcppmeanvarFN(int, int)",
+                "file": "C:/Users/cgala/Documents/GitHub/MomTrunc/src/my_functions.cpp",
+                "line": 1467,
+                "column": 12
+            },
+            {
+                "usr": "c:@F@RcppmomentsFN#I#I#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "RcppmomentsFN(int, int, int)",
+                "file": "C:/Users/cgala/Documents/GitHub/MomTrunc/src/my_functions.cpp",
+                "line": 1522,
+                "column": 12
+            },
+            {
+                "usr": "c:@F@RcppmeanvarFT#I#I#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "RcppmeanvarFT(int, int, double)",
+                "file": "C:/Users/cgala/Documents/GitHub/MomTrunc/src/my_functions.cpp",
+                "line": 1544,
+                "column": 12
+            },
+            {
+                "usr": "c:@F@Rcpporder#I#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "Rcpporder(int, int)",
+                "file": "C:/Users/cgala/Documents/GitHub/MomTrunc/src/my_functions.cpp",
+                "line": 1618,
+                "column": 11
+            },
+            {
+                "usr": "c:@F@RcppmomentsFT#I#I#I#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "RcppmomentsFT(int, int, int, double)",
+                "file": "C:/Users/cgala/Documents/GitHub/MomTrunc/src/my_functions.cpp",
+                "line": 1634,
+                "column": 11
+            },
+            {
+                "usr": "c:@F@RcppmeanvarN_b#I#I#I#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "RcppmeanvarN_b(int, int, int, double)",
+                "file": "C:/Users/cgala/Documents/GitHub/MomTrunc/src/my_functions.cpp",
+                "line": 1664,
+                "column": 12
+            },
+            {
+                "usr": "c:@F@RcppmeanvarN#I#I#I#I#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "RcppmeanvarN(int, int, int, int, double)",
+                "file": "C:/Users/cgala/Documents/GitHub/MomTrunc/src/my_functions.cpp",
+                "line": 1727,
+                "column": 12
+            },
+            {
+                "usr": "c:@F@RcppmeanvarN_ab#I#I#I#I#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "RcppmeanvarN_ab(int, int, int, int, double)",
+                "file": "C:/Users/cgala/Documents/GitHub/MomTrunc/src/my_functions.cpp",
+                "line": 1814,
+                "column": 12
+            },
+            {
+                "usr": "c:@F@RcpponlymeanN#I#I#I#I#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "RcpponlymeanN(int, int, int, int, double)",
+                "file": "C:/Users/cgala/Documents/GitHub/MomTrunc/src/my_functions.cpp",
+                "line": 1899,
+                "column": 12
+            },
+            {
+                "usr": "c:@F@RcppmomentsN#I#I#I#I#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "RcppmomentsN(int, int, int, int, int)",
+                "file": "C:/Users/cgala/Documents/GitHub/MomTrunc/src/my_functions.cpp",
+                "line": 1939,
+                "column": 12
+            }
+        ]
+    },
+    {
         "file": "C:/Users/cgala/Dropbox/Academic/Packages/MomTrunc/src/my_functions.cpp",
         "file_last_write": 1613246180.0,
         "definitions": [

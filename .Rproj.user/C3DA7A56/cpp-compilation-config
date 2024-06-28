@@ -1,16 +1,24 @@
 {
     "args": [
-        "-IC:/Program Files/RStudio/resources/libclang/builtin-headers/5.0.2",
-        "-IC:/Program Files/RStudio/resources/libclang/builtin-headers/libc++/5.0.2",
-        "-IC:/Users/cgala/Documents/R/win-library/3.6/Rcpp/include",
-        "-IC:/Users/cgala/Documents/R/win-library/3.6/RcppArmadillo/include",
-        "-IC:/Users/cgala/Documents/R/win-library/3.6/mvtnorm/include",
         "-std=gnu++11",
-        "-IC:/PROGRA~1/R/R-36~1.2/include",
+        "-IC:/PROGRA~1/R/R-41~1.2/include",
         "-DNDEBUG",
-        "-IC:/Users/cgala/Dropbox/Academic/Packages/MomTrunc/inst/include/"
+        "-IC:/Users/cgala/Documents/GitHub/MomTrunc/inst/include/",
+        "-IC:/PROGRA~1/R/R-41~1.2/library/Rcpp/include",
+        "-IC:/PROGRA~1/R/R-41~1.2/library/RCPPAR~1/include",
+        "-IC:/PROGRA~1/R/R-41~1.2/library/mvtnorm/include",
+        "-nostdinc",
+        "-IC:/rtools40/mingw64/include/c++/8.3.0",
+        "-IC:/rtools40/mingw64/include/c++/8.3.0/x86_64-w64-mingw32",
+        "-IC:/rtools40/mingw64/include/c++/8.3.0/backward",
+        "-IC:/rtools40/mingw64/lib/gcc/x86_64-w64-mingw32/8.3.0/include",
+        "-IC:/rtools40/mingw64/include",
+        "-IC:/rtools40/mingw64/lib/gcc/x86_64-w64-mingw32/8.3.0/include-fixed",
+        "-IC:/rtools40/mingw64/x86_64-w64-mingw32/include"
     ],
     "pch": "RcppArmadillo",
     "is_cpp": true,
-    "hash": "1576984814161463449215108849751510884975"
+    "hash": "1576984814165530791515108849751510884975",
+    "compiler": "15831801441610807778",
+    "rversion": "4.1.2"
 }
