@@ -1,8 +1,8 @@
 Package: MomTrunc
 Type: Package
 Title: Moments of Folded and Doubly Truncated Multivariate Distributions
-Version: 6.0
-Date: 2022-06-15
+Version: 6.1
+Date: 2024-10-17
 Authors@R:
   c(person(given = "Christian E.",
            family = "Galarza",

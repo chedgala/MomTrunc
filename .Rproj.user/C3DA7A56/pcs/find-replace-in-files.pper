@@ -1,13 +1,15 @@
 {
     "dialog-state": {
-        "query": "cat(",
+        "query": "warning",
         "path": "",
         "regex": true,
         "caseSensitive": true,
         "wholeWord": false,
         "filePatterns": [],
+        "useGitGrep": true,
+        "excludeGitIgnore": false,
         "excludeFilePatterns": [],
-        "resultsCount": 18,
+        "resultsCount": 28,
         "errorCount": 0,
         "replaceErrors": "",
         "projectRelative": true
