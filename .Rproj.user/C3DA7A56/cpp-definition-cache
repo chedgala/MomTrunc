@@ -1,10 +1,10 @@
 [
     {
         "file": "C:/Users/cgala/Documents/GitHub/MomTrunc/src/my_functions.cpp",
-        "file_last_write": 1613246180.0,
+        "file_last_write": 1730149695.0,
         "definitions": [
             {
-                "usr": "c:@F@TT_GS_sp#I#$@N@arma@S@Mat>#d#d#$@N@arma@S@Col>#d#S1_#S1_#",
+                "usr": "c:@F@TT_GS_sp#i#$@N@arma@S@Mat>#d#d#$@N@arma@S@Col>#d#S1_#S1_#",
                 "kind": 6,
                 "parent_name": "",
                 "name": "TT_GS_sp(arma::uword, arma::mat, double, arma::vec, arma::vec, arma::vec)",
@@ -104,7 +104,7 @@
                 "hidden": false
             },
             {
-                "usr": "c:@F@vecpow#1I#1I#",
+                "usr": "c:@F@vecpow#1$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#1S0_#",
                 "kind": 6,
                 "parent_name": "",
                 "name": "vecpow(const Rcpp::NumericVector, const Rcpp::NumericVector)",
