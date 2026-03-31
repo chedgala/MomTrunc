@@ -9,7 +9,7 @@ It computes kappa-th order moments for for some doubly truncated skew-elliptical
 }
 \usage{
 momentsTMD(kappa,lower = rep(-Inf,length(mu)),upper = rep(Inf,length(mu)),mu,Sigma,
-lambda = NULL,tau = NULL,nu = NULL,dist)
+lambda = NULL,tau = NULL,nu = NULL,dist,maxpts = 25000,abseps = 1e-3)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -40,6 +40,12 @@ It represents the degrees of freedom for the Student's t-distribution being a po
   \item{dist}{
 represents the truncated distribution to be used. The values are \code{normal}, \code{SN} and \code{ESN} for the doubly truncated Normal, Skew-normal and Extended Skew-normal distributions and,
 \code{t}, \code{ST} and \code{EST} for the for the doubly truncated Student-t, Skew-t and Extended Skew-t distributions.
+}
+  \item{maxpts}{
+Integer. Given by the \code{mvtnorm} package, represents the maximum number of function values allowed for the quasi-Monte Carlo integration algorithm. Default is \code{25000}.
+}
+  \item{abseps}{
+Numeric. Given by the \code{mvtnorm} package, represents the absolute error tolerance for the quasi-Monte Carlo integration. Default is \code{1e-3}.
 }
 }
 \details{

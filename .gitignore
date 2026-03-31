@@ -5,3 +5,8 @@
 src/*.o
 src/*.so
 src/*.dll
+sandbox.R
+bug2_*.R
+*.Rcheck/
+*.tar.gz
+

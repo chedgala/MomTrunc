@@ -11,7 +11,7 @@
 
 pmvEST = function(lower = rep(-Inf,length(lambda)),upper=rep(Inf,length(lambda)),mu = rep(0,length(lambda)),Sigma,lambda,tau,nu,log2 = FALSE){
   tautil<-tau/sqrt(1+sum(lambda^2))
-  if(pt(tautil,nu)< pnorm(-37)){
+  if(tautil < -37){
     #print("normal aproximation")
     Delta = sqrtm(Sigma)%*%lambda/sqrt(1+sum(lambda^2))
     Gamma = Sigma - Delta%*%t(Delta)
@@ -32,8 +32,8 @@ pmvEST = function(lower = rep(-Inf,length(lambda)),upper=rep(Inf,length(lambda))
   rownames(Omega) <- colnames(Omega)
 
   if(log2 == TRUE){
-    return(min(pmvnormt(lower = aaum,upper = baum,sigma = Omega,nu = nu+1,uselog2 = TRUE) - pt(tautil,nu,log.p = TRUE)/log(2),0))
+    return(min(pmvnormt(lower = aaum,upper = baum,sigma = Omega,nu = nu,uselog2 = TRUE) - pt(tautil,nu,log.p = TRUE)/log(2),0))
   }else{
-    return(min(pmvnormt(lower = aaum,upper = baum,sigma = Omega,nu = nu+1)/pt(tautil,nu),1))
+    return(min(pmvnormt(lower = aaum,upper = baum,sigma = Omega,nu = nu)/pt(tautil,nu),1))
   }
 }

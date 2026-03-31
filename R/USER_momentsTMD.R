@@ -1,7 +1,8 @@
 #FULL MOMENTS TRUNCATED
 
-momentsTMD = function(kappa,lower = rep(-Inf,length(mu)),upper = rep(Inf,length(mu)),mu,Sigma,lambda = NULL, tau = NULL,nu = NULL,dist)
+momentsTMD = function(kappa,lower = rep(-Inf,length(mu)),upper = rep(Inf,length(mu)),mu,Sigma,lambda = NULL, tau = NULL,nu = NULL,dist,maxpts=25000,abseps=1e-3)
 {
+  set_integration_precision(maxpts, abseps)
   mu = c(mu)
   lambda = c(lambda)
   

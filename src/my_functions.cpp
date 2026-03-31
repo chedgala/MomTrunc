@@ -14,6 +14,15 @@ using namespace Rcpp;
 using namespace arma;
 
 
+static int global_maxpts = 25000;
+static double global_abseps = 1e-3;
+
+// [[Rcpp::export]]
+void set_integration_precision(int maxpts = 25000, double abseps = 1e-3) {
+    global_maxpts = maxpts;
+    global_abseps = abseps;
+}
+
 // [[Rcpp::export]]
 arma::mat TT_GS_sp(arma::uword n, arma::mat R, double nu, arma::vec x, arma::vec lower, arma::vec upper) {
   arma::mat Rinv=R.i();
@@ -75,7 +84,8 @@ double Fpmvt_cpp(arma::vec& upper,
   arma::vec lowertrivec = triangl(R);
   
   int n = upper.n_elem;
-  int maxpts = 25000;     // default in mvtnorm: 25000
+  int maxpts = global_maxpts;
+  abseps = global_abseps;
   double releps = 0;      // default in mvtnorm: 0
   int rnd = 1;            // Get/PutRNGstate
   
@@ -116,7 +126,8 @@ double pmvt_cpp(arma::vec& lower,arma::vec& upper,
   arma::vec lowertrivec = triangl(R);
   
   int n = lower.n_elem;
-  int maxpts = 25000;     // default in mvtnorm: 25000
+  int maxpts = global_maxpts;
+  abseps = global_abseps;
   double releps = 0;      // default in mvtnorm: 0
   int rnd = 1;            // Get/PutRNGstate
   

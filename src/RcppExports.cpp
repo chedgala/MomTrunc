@@ -11,6 +11,17 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
+// set_integration_precision
+void set_integration_precision(int maxpts, double abseps);
+RcppExport SEXP _MomTrunc_set_integration_precision(SEXP maxptsSEXP, SEXP absepsSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type maxpts(maxptsSEXP);
+    Rcpp::traits::input_parameter< double >::type abseps(absepsSEXP);
+    set_integration_precision(maxpts, abseps);
+    return R_NilValue;
+END_RCPP
+}
 // TT_GS_sp
 arma::mat TT_GS_sp(arma::uword n, arma::mat R, double nu, arma::vec x, arma::vec lower, arma::vec upper);
 RcppExport SEXP _MomTrunc_TT_GS_sp(SEXP nSEXP, SEXP RSEXP, SEXP nuSEXP, SEXP xSEXP, SEXP lowerSEXP, SEXP upperSEXP) {
@@ -282,6 +293,7 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_MomTrunc_set_integration_precision", (DL_FUNC) &_MomTrunc_set_integration_precision, 2},
     {"_MomTrunc_TT_GS_sp", (DL_FUNC) &_MomTrunc_TT_GS_sp, 6},
     {"_MomTrunc_triangl", (DL_FUNC) &_MomTrunc_triangl, 1},
     {"_MomTrunc_Fpmvt_cpp", (DL_FUNC) &_MomTrunc_Fpmvt_cpp, 4},
